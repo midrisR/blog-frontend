@@ -1,0 +1,10 @@
+.swiper-container {
+  transition-duration: 0.5s !important;
+  transform: scale(0.5) !important;
+}
+.custom-html-style code, .custom-html-style pre {
+  background: transparent !important;
+}
+.custom-html-style {
+  text-align: left;
+}
