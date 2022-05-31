@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function home({ blog }) {
-	console.log(blog);
 	const [field, setField] = useState({
 		title: "",
 		cover: "",
