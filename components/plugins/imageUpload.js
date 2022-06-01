@@ -9,6 +9,7 @@ export default class imageUpload extends PluginComponent {
 		query: "",
 		open: false,
 		loading: true,
+		page: 1,
 		image: [],
 	};
 
@@ -19,10 +20,12 @@ export default class imageUpload extends PluginComponent {
 		this.handleChange = this.handleChange.bind(this);
 		this.fetchImage = this.fetchImage.bind(this);
 		this.selectImage = this.selectImage.bind(this);
+		this.loadMore = this.loadMore.bind(this);
 		this.state = {
 			query: this.getConfig("query"),
 			open: this.getConfig("open"),
 			image: this.getConfig("image"),
+			page: this.getConfig("page"),
 			loading: this.getConfig("loading"),
 		};
 	}
@@ -35,7 +38,7 @@ export default class imageUpload extends PluginComponent {
 
 	async fetchImage(e) {
 		e.preventDefault();
-		const url = "http://localhost:5000/unsplash";
+		const url = `http://localhost:5000/unsplash?page=${this.state.page}`;
 		try {
 			const response = await axios({
 				method: "post",
@@ -44,13 +47,51 @@ export default class imageUpload extends PluginComponent {
 					query: this.state.query,
 				},
 			});
-			this.setState({
-				loading: !this.state.loading,
-				image: response.data.results,
+
+			this.setState((prevState) => {
+				return {
+					...prevState,
+					loading: !this.state.loading,
+					image: response.data.results,
+				};
 			});
 		} catch (error) {
 			console.log(error);
 		}
+	}
+
+	loadMore() {
+		this.setState(
+			(prevState) => {
+				return { page: prevState.page + 1 };
+			},
+			async () => {
+				const url = `http://localhost:5000/unsplash?page=${this.state.page}`;
+				try {
+					const response = await axios({
+						method: "post",
+						url: url,
+						data: {
+							query: this.state.query,
+						},
+					});
+
+					// this.setState((prevState) => {
+					// 	return {
+					// 		...prevState,
+					// 		loading: !this.state.loading,
+					// 		image: response.data.results,
+					// 	};
+					// });
+					const results = response.data.results;
+					this.setState((prevState) => {
+						return { image: [...prevState.image, ...results] };
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			}
+		);
 	}
 
 	handleClick() {
@@ -77,7 +118,7 @@ export default class imageUpload extends PluginComponent {
 					name='query'
 					onChange={this.handleChange}
 				/>
-				<button className='mt-2 px-4 py-2 rounded-lg bg-blue-200' onClick={this.fetchImage}>
+				<button className='mb-5 mt-2 px-4 py-2 rounded-lg bg-blue-200' onClick={this.fetchImage}>
 					submit
 				</button>
 			</>
@@ -101,6 +142,7 @@ export default class imageUpload extends PluginComponent {
 					images={this.state.image}
 					loading={this.state.loading}
 					selectImage={this.selectImage}
+					loadMore={this.loadMore}
 				/>
 			</>
 		);

@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function home({ blog }) {
+	// console.log(blog.title);
 	const [field, setField] = useState({
 		title: "",
 		cover: "",
@@ -34,9 +35,14 @@ export default function home({ blog }) {
 		body.append("cover", field.cover);
 		body.append("title", field.title);
 		body.append("content", field.content);
-		axios
-			.post("http://localhost:5000/api/article", body)
-			.then(function (response) {
+		axios("http://localhost:5000/api/article", {
+			method: "POST",
+			data: body,
+			headers: {
+				Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTc1NzdmMmIwNjJkYjc2NmJiMjFmYSIsImlhdCI6MTY1NDA5ODU5NSwiZXhwIjoxNjU2NjkwNTk1fQ.iltkgXg-c6b81WGEkjX_TGtATe61QoFk_fhiCLwz4aA`,
+			},
+		})
+			.then((response) => {
 				console.log(response);
 			})
 			.catch(function (error) {
@@ -75,10 +81,10 @@ export default function home({ blog }) {
 						</button>
 					</div>
 					<div className='w-1/2'>
-						<div className='p-10'>
-							<h1 className='text-4xl text-white font-bold mb-5'>{blog.article.title}</h1>
-							<img src={`http://localhost:5000/uploads/${blog.article.cover}`} alt='' />
-							<RenderMd markdown={blog.article.content} />
+						<div className='p-10 bg-white'>
+							<h1 className='text-4xl text-black font-bold mb-5'>{blog.title}</h1>
+							{/* <img src={`http://localhost:5000/uploads/${blog.article.cover}`} alt='' /> */}
+							<RenderMd markdown={blog.content} />
 						</div>
 					</div>
 				</div>
@@ -88,10 +94,9 @@ export default function home({ blog }) {
 }
 
 export async function getServerSideProps() {
-	const res = await fetch(`http://localhost:5000/api/article/6294eb45cdc75f3aa80bdefa`);
-	const blog = await res.json();
-	// console.log(blog.article);
+	const res = await axios(`http://localhost:5000/api/article/62979c9421d7edec73f336e9`);
+	const blog = await res.data.article;
 	return {
-		props: { blog }, // will be passed to the page component as props
+		props: { blog },
 	};
 }

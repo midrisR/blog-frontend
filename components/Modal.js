@@ -1,5 +1,5 @@
 import Image from "next/image";
-export default function Modal({ showModal, setShowModal, children, images, loading, selectImage }) {
+export default function Modal({ showModal, setShowModal, children, images, loading, selectImage, loadMore }) {
 	return (
 		<>
 			{showModal ? (
@@ -8,18 +8,12 @@ export default function Modal({ showModal, setShowModal, children, images, loadi
 						<div className='relative w-auto my-6 mx-auto max-w-3xl'>
 							{/*content*/}
 							<div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
-								{/*header*/}
-								<div className='flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t'>
-									<h3 className='text-3xl font-semibold'>Modal Title</h3>
-									<button
-										className='p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none'
-										onClick={() => setShowModal(false)}>
-										<span className='bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none'>
-											×
-										</span>
-									</button>
-								</div>
 								{/*body*/}
+								<div
+									className='w-full flex justify-end p-4 cursor-pointer'
+									onClick={() => setShowModal(false)}>
+									<span className='text-red-500 text-sm'>close</span>
+								</div>
 								<div className='relative p-6 flex-auto overflow-hidden'>
 									{children}
 									<div className={`my2 ${!loading && "h-96 overflow-y-scroll"}`}>
@@ -36,6 +30,15 @@ export default function Modal({ showModal, setShowModal, children, images, loadi
 													/>
 												</div>
 											))}
+											{images.length > 0 && (
+												<div className='w-full flex justify-center'>
+													<button
+														className='px-3 py-2 mt-2 text-white bg-blue-500 rounded'
+														onClick={loadMore}>
+														Load more
+													</button>
+												</div>
+											)}
 										</div>
 									</div>
 								</div>
