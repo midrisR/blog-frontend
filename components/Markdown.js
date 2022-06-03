@@ -5,7 +5,10 @@ import RenderMd from "./Md";
 const MdEditor = dynamic(
 	() => {
 		return new Promise((resolve) => {
-			Promise.all([import("react-markdown-editor-lite"), import("./plugins/imageUpload")]).then((res) => {
+			Promise.all([
+				import("react-markdown-editor-lite"),
+				import("./plugins/imageUpload"),
+			]).then((res) => {
 				res[0].default.use(res[1].default);
 				resolve(res[0].default);
 			});
@@ -17,21 +20,15 @@ const MdEditor = dynamic(
 );
 
 function Markdown({ handleEditorChange }) {
-	// const [open, setOpen] = useState(false);
-	// const onImageUpload = (file, callback) => {
-	// 	const reader = new FileReader();
-	// 	reader.onload = (data) => {
-	// 		setTimeout(() => {
-	// 			callback(data.target.result);
-	// 		}, 1000);
-	// 	};
-	// 	reader.readAsDataURL(file);
-	// };
-
-	// const handleUploadImage = (e) => {
-	// 	e.preventDefault();
-	// 	setOpen((open) => !open);
-	// };
+	const onImageUpload = (file, callback) => {
+		const reader = new FileReader();
+		reader.onload = (data) => {
+			setTimeout(() => {
+				callback(data.target.result);
+			}, 1000);
+		};
+		reader.readAsDataURL(file);
+	};
 
 	return (
 		<MdEditor
@@ -50,6 +47,7 @@ function Markdown({ handleEditorChange }) {
 				syncScrollMode: ["leftFollowRight", "rightFollowLeft"],
 			}}
 			className='w-full'
+			onImageUpload={onImageUpload}
 			name='content'
 			style={{ height: "500px" }}
 			renderHTML={(text) => <RenderMd markdown={text} />}

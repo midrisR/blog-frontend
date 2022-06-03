@@ -15,7 +15,6 @@ export default class imageUpload extends PluginComponent {
 
 	constructor(props) {
 		super(props);
-		// this.handleClick = this.handleClick.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.fetchImage = this.fetchImage.bind(this);
@@ -105,7 +104,7 @@ export default class imageUpload extends PluginComponent {
 			imageUrl: data,
 		});
 		this.setState({
-			open: !this.state.open,
+			open: false,
 		});
 	}
 
@@ -116,9 +115,11 @@ export default class imageUpload extends PluginComponent {
 					type='text'
 					className='w-full bg-white px-3 py-2 rounded-lg focus:outline-none ring-1 ring-blue-400'
 					name='query'
+					placeholder='search image'
+					autoComplete='off'
 					onChange={this.handleChange}
 				/>
-				<button className='mb-5 mt-2 px-4 py-2 rounded-lg bg-blue-200' onClick={this.fetchImage}>
+				<button className='mt-2 px-4 py-2 rounded-lg text-blue-600 bg-blue-200' onClick={this.fetchImage}>
 					submit
 				</button>
 			</>
@@ -127,11 +128,10 @@ export default class imageUpload extends PluginComponent {
 			<>
 				<span
 					className='button button-type-image'
-					title='Image'
+					title='Unsplash'
 					style={{ display: "flex" }}
 					onClick={this.handleClick}>
 					<svg role='img' width={15} fill='#757575' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-						<title />
 						<path d='M7.5 6.75V0h9v6.75h-9zm9 3.75H24V24H0V10.5h7.5v6.75h9V10.5z' />
 					</svg>
 				</span>

@@ -50,29 +50,31 @@ export default function home({ blog }) {
 			});
 	};
 	return (
-		<div className='bg-slate-900 min-h-screen'>
+		<div className='bg-white min-h-screen'>
 			<div className='p-20'>
 				<div className='w-full flex flex-wrap'>
 					<div className='w-1/2'>
-						<div className='mb-1'>
-							<span className='text-white block'>title</span>
-							<input
-								onChange={handleChange}
-								type='text'
-								className='bg-white px-3 py-2 rounded-lg focus:outline-none'
-								name='title'
-							/>
+						<div className='w-full flex wrap'>
+							<div className='w-1/2 mb-4 px-2'>
+								<label className='block text-gray-700 text-sm font-bold mb-2'>Title</label>
+								<input
+									onChange={handleChange}
+									type='text'
+									className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+									name='title'
+								/>
+							</div>
+							<div className='w-1/2 mb-4 px-2'>
+								<label className='block text-gray-700 text-sm font-bold mb-2'>Cover</label>
+								<input
+									type='file'
+									name='cover'
+									className='shadow block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-500 bg-white rounded overflow-hidden ocus:outline-none focus:shadow-outline'
+									onChange={uploadToClient}
+								/>
+							</div>
 						</div>
-						<div className='mb-1'>
-							<span className='text-white block'>cover</span>
-							<input
-								type='file'
-								className='bg-white px-3 py-2 rounded-lg focus:outline-none'
-								name='cover'
-								onChange={uploadToClient}
-							/>
-						</div>
-						<div className='mb-1'>
+						<div className='mb-4'>
 							<span className='text-white block'>content</span>
 							<Markdown handleEditorChange={handleGetMdValue} />
 						</div>
@@ -80,23 +82,17 @@ export default function home({ blog }) {
 							submit
 						</button>
 					</div>
-					<div className='w-1/2'>
-						<div className='p-10 bg-white'>
-							<h1 className='text-4xl text-black font-bold mb-5'>{blog.title}</h1>
-							{/* <img src={`http://localhost:5000/uploads/${blog.article.cover}`} alt='' /> */}
-							<RenderMd markdown={blog.content} />
-						</div>
-					</div>
+					<div className='w-1/2'>{/* example */}</div>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export async function getServerSideProps() {
-	const res = await axios(`http://localhost:5000/api/article/62979c9421d7edec73f336e9`);
-	const blog = await res.data.article;
-	return {
-		props: { blog },
-	};
-}
+// export async function getServerSideProps() {
+// 	const res = await axios(`http://localhost:5000/api/article/62979c9421d7edec73f336e9`);
+// 	const blog = await res.data.article;
+// 	return {
+// 		props: { blog },
+// 	};
+// }
