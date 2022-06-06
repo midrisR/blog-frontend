@@ -18,8 +18,7 @@ const MdEditor = dynamic(
 		ssr: false,
 	}
 );
-
-function Markdown({ handleEditorChange }) {
+function Markdown({ defaultValue, handleEditorChange }) {
 	const onImageUpload = (file, callback) => {
 		const reader = new FileReader();
 		reader.onload = (data) => {
@@ -49,6 +48,7 @@ function Markdown({ handleEditorChange }) {
 			className='w-full'
 			onImageUpload={onImageUpload}
 			name='content'
+			defaultValue={defaultValue}
 			style={{ height: "500px" }}
 			renderHTML={(text) => <RenderMd markdown={text} />}
 			onChange={handleEditorChange}

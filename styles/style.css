@@ -8,3 +8,10 @@
 .custom-html-style {
   text-align: left;
 }
+.custom-html-style ul {
+  list-style:disc !important;
+}
+
+.custom-html-style ol {
+  list-style: decimal !important;
+}

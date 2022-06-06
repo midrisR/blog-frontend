@@ -1,24 +1,20 @@
-import Navbar from "../../components/navbar/navbar";
-import Sidebar from "../../components/sidebar/sidebar";
-import HeaderStats from "../../components/header/header";
-// import FooterAdmin from "components/Footers/FooterAdmin.js";
-// <Sidebar />
-// <div className='relative md:ml-64 bg-red-500'>
-//     <Navbar />
-//     <div className='px-4 md:px-10 mx-auto w-full -m-24'>{children}</div>
-// </div>
-export default function Admin({ children }) {
+import Admin from "../../components/layouts/admin";
+import { authPageAdmin } from "../../middleware/auth";
+
+export const getServerSideProps = async (ctx) => {
+	await authPageAdmin(ctx);
+	return {
+		props: {},
+	};
+};
+export default function PageAdmin() {
 	return (
-		<>
-			<Sidebar />
-			<div className='relative md:ml-64 bg-blue-100'>
-				<Navbar />
-				<div className='px-4 md:px-10 mx-auto w-full -m-24'>
-					<main className='  relative bg-blueGray-800 md:pt-32 pb-32 pt-12'>
-						<div className='mt-24'>{children}</div>
-					</main>
-				</div>
-			</div>
-		</>
+		<h1 className='text-center text-4xl text-gray-500 font-black'>
+			HALAMAN ADMIN
+		</h1>
 	);
 }
+
+PageAdmin.getLayout = function getLayout(page) {
+	return <Admin>{page}</Admin>;
+};

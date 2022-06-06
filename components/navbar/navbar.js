@@ -1,34 +1,116 @@
-import React from "react";
-
+import { useState } from "react";
+import Link from "next/link";
 export default function Navbar() {
+	const [open, setOpen] = useState(false);
+
+	const handleClick = () => {
+		setOpen((open) => !open);
+	};
 	return (
-		<>
-			{/* Navbar */}
-			<nav className='fixed top-0 md:left-64 w-full z-10 bg-white shadow-lg md:flex-row md:flex-nowrap md:justify-start flex items-center p-4'>
-				<div className='w-full mx-auto items-center flex justify-between flex-wrap md:px-10 px-4'>
-					{/* Brand */}
-					<a
-						className='text-blue-500 text-sm uppercase hidden lg:inline-block font-semibold'
-						href='#pablo'
-						onClick={(e) => e.preventDefault()}>
-						Dashboard
-					</a>
-					{/* Form */}
-					<form className='md:flex hidden mr-64'>
-						<div className='relative flex w-full flex-wrap items-stretch'>
-							<span className='z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3'>
-								<i className='fas fa-search'></i>
-							</span>
-							<input
-								type='text'
-								placeholder='Search here...'
-								className='border-0 px-3 py-3 placeholder-blueGray-300 text-gray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10'
-							/>
+		<nav className='bg-blue-900 border-gray-200 px-2 sm:px-4 py-2.5'>
+			<div className='container flex flex-wrap justify-between items-center mx-auto'>
+				<a href='https://flowbite.com' className='flex items-center'>
+					<span className='text-white font-2xl font-bold self-center whitespace-nowrap'>
+						BLOGGER
+					</span>
+				</a>
+				<div className='flex md:order-2'>
+					<button
+						type='button'
+						className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1'>
+						<svg
+							className='w-5 h-5'
+							fill='currentColor'
+							viewBox='0 0 20 20'
+							xmlns='http://www.w3.org/2000/svg'>
+							<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
+						</svg>
+					</button>
+					<div className='hidden relative md:block'>
+						<div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+							<svg
+								className='w-5 h-5 text-gray-500'
+								fill='currentColor'
+								viewBox='0 0 20 20'
+								xmlns='http://www.w3.org/2000/svg'>
+								<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
+							</svg>
 						</div>
-					</form>
+						<input
+							type='text'
+							className='block p-2 pl-10 w-full text-blue-900 bg-white rounded-xl focus:outline-none'
+							placeholder='Search...'
+						/>
+					</div>
+					<button
+						type='button'
+						className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+						onClick={handleClick}>
+						<svg
+							className='w-6 h-6'
+							fill='currentColor'
+							viewBox='0 0 20 20'
+							xmlns='http://www.w3.org/2000/svg'>
+							<path d='M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z'></path>
+						</svg>
+						<svg
+							className='hidden w-6 h-6'
+							fill='currentColor'
+							viewBox='0 0 20 20'
+							xmlns='http://www.w3.org/2000/svg'>
+							<path d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'></path>
+						</svg>
+					</button>
 				</div>
-			</nav>
-			{/* End Navbar */}
-		</>
+				<div
+					className={`${
+						open ? "block" : "hidden"
+					} justify-between items-center w-full md:flex md:w-auto md:order-1`}
+					id='mobile-menu-3'>
+					<div className='relative mt-3 md:hidden'>
+						<div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+							<svg
+								className='w-5 h-5 text-gray-500'
+								fill='currentColor'
+								viewBox='0 0 20 20'
+								xmlns='http://www.w3.org/2000/svg'>
+								<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
+							</svg>
+						</div>
+						<input
+							type='text'
+							id='search-navbar'
+							className='block p-2 pl-10 w-full text-gray-900 bg-white rounded-lg border '
+							placeholder='Search...'
+						/>
+					</div>
+					<ul className='flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium'>
+						<li>
+							<Link href='/'>
+								<a
+									className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'
+									aria-current='page'>
+									Home
+								</a>
+							</Link>
+						</li>
+						<li>
+							<a
+								href='#'
+								className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'>
+								About
+							</a>
+						</li>
+						<li>
+							<a
+								href='#'
+								className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'>
+								Services
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 	);
 }
