@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Admin from "../../../../components/layouts/admin";
 import cookies from "next-cookies";
-
+import { authPageAdmin } from "../../../../middleware/auth";
+import Router from "next/router";
 export async function getServerSideProps(ctx) {
+	await authPageAdmin(ctx);
 	const { token } = cookies(ctx);
 	const { id } = ctx.params;
 	const res = await axios.get(`http://localhost:5000/api/article/${id}`);
@@ -18,6 +20,8 @@ export default function Edit({ article, token, id }) {
 		title: article.title,
 		cover: article.cover,
 		content: article.content,
+		active: article.active,
+		featured: article.featured,
 	});
 
 	useEffect(() => {
@@ -31,9 +35,11 @@ export default function Edit({ article, token, id }) {
 		let files = [new File(["content"], article.cover)];
 		file.files = new FileListItems(files);
 	}, []);
+
 	const handleGetMdValue = ({ html, text }, event) => {
 		setField({ ...field, content: text });
 	};
+
 	const uploadToClient = (e) => {
 		if (e.target.files && e.target.files[0]) {
 			const i = e.target.files[0];
@@ -42,12 +48,19 @@ export default function Edit({ article, token, id }) {
 	};
 
 	const handleChange = (e) => {
-		e.preventDefault();
 		const attr = e.target;
 		setField({
 			...field,
 			[attr.name]: attr.value,
 		});
+	};
+
+	const handleChecked = (e) => {
+		const attr = e.target;
+		setField((value) => ({
+			...field,
+			[attr.name]: !value[attr.name],
+		}));
 	};
 
 	const onSubmit = async (e) => {
@@ -56,6 +69,8 @@ export default function Edit({ article, token, id }) {
 		body.append("cover", field.cover);
 		body.append("title", field.title);
 		body.append("content", field.content);
+		body.append("active", field.active);
+		body.append("featured", field.featured);
 		body.append("slug", article.slug);
 		await axios(`http://localhost:5000/api/article/${id}`, {
 			method: "PUT",
@@ -64,7 +79,9 @@ export default function Edit({ article, token, id }) {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Router.push("/admin/article");
 	};
+
 	return (
 		<div className='bg-white min-h-screen'>
 			<div className='p-20'>
@@ -91,6 +108,46 @@ export default function Edit({ article, token, id }) {
 							className='shadow block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-500 bg-white rounded overflow-hidden ocus:outline-none focus:shadow-outline'
 							onChange={uploadToClient}
 						/>
+					</div>
+				</div>
+
+				<div className='flex px-2 w-1/2 justify-between'>
+					<div className='flex'>
+						<label className='block text-gray-700 text-sm font-bold mb-2 mr-3'>
+							Active
+						</label>
+						<div className='form-check form-switch'>
+							<label className='inline-flex relative items-center cursor-pointer'>
+								<input
+									type='checkbox'
+									name='active'
+									defaultValue={article.active}
+									className='sr-only peer'
+									checked={field.active}
+									onChange={handleChecked}
+								/>
+								<div className="w-11 h-6 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5  peer-checked:bg-blue-600 after:transition-all"></div>
+							</label>
+						</div>
+					</div>
+					{/* featured */}
+					<div className='flex'>
+						<label className='block text-gray-700 text-sm font-bold mb-2 mr-3'>
+							Featured
+						</label>
+						<div className='form-check form-switch'>
+							<label className='inline-flex relative items-center cursor-pointer'>
+								<input
+									type='checkbox'
+									name='featured'
+									defaultValue={article.featured}
+									className='sr-only peer'
+									checked={field.featured}
+									onChange={handleChecked}
+								/>
+								<div className="w-11 h-6 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 peer-checked:bg-blue-600 after:transition-all"></div>
+							</label>
+						</div>
 					</div>
 				</div>
 				<div className='mb-4'>

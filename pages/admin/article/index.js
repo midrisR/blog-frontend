@@ -1,8 +1,10 @@
 import axios from "axios";
 import Link from "next/link";
 import Admin from "../../../components/layouts/admin";
+import { authPageAdmin } from "../../../middleware/auth";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+	await authPageAdmin(ctx);
 	const res = await axios.get("http://localhost:5000/api/article/");
 	const { articles } = res.data;
 	return {
@@ -21,6 +23,12 @@ export default function View({ articles }) {
 						</th>
 						<th scope='col' className='px-6 py-3'>
 							author
+						</th>
+						<th scope='col' className='px-6 py-3'>
+							active
+						</th>
+						<th scope='col' className='px-6 py-3'>
+							featured
 						</th>
 						<th scope='col' className='px-6 py-3'>
 							created at
@@ -43,6 +51,22 @@ export default function View({ articles }) {
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap'>
 									{article.user.name}
+								</td>
+								<td
+									className={`px-6 py-4 font-bold whitespace-nowrap ${
+										article.active
+											? "text-green-700"
+											: "text-red-500"
+									}`}>
+									{new Boolean(article.active).toString()}
+								</td>
+								<td
+									className={`px-6 py-4 whitespace-nowrap font-bold ${
+										article.featured
+											? "text-green-700"
+											: "text-red-500"
+									}`}>
+									{new Boolean(article.featured).toString()}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap'>
 									{newDate}

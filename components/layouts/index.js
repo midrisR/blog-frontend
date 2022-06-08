@@ -1,7 +1,12 @@
+import Navbar from "../navbar/navbar";
+import Footer from "../footer";
+
 export default function Layout({ children }) {
 	return (
-		<div>
-			<main>{children}</main>
+		<div className='bg-slate-900'>
+			<Navbar />
+			<article>{children}</article>
+			<Footer />
 		</div>
 	);
 }

@@ -1,114 +1,134 @@
 import { useState } from "react";
 import Link from "next/link";
-export default function Navbar() {
-	const [open, setOpen] = useState(false);
 
-	const handleClick = () => {
-		setOpen((open) => !open);
+export default function Navbar() {
+	const [offcavnas, setOffcanvas] = useState(false);
+	const [search, setSearch] = useState(false);
+	const handleCanvas = () => {
+		setOffcanvas((canvas) => !canvas);
+	};
+	const handleSearch = () => {
+		setSearch((search) => !search);
 	};
 	return (
-		<nav className='bg-blue-900 border-gray-200 px-2 sm:px-4 py-2.5'>
-			<div className='container flex flex-wrap justify-between items-center mx-auto'>
-				<a href='https://flowbite.com' className='flex items-center'>
-					<span className='text-white font-2xl font-bold self-center whitespace-nowrap'>
-						BLOGGER
-					</span>
-				</a>
-				<div className='flex md:order-2'>
-					<button
-						type='button'
-						className='md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1'>
-						<svg
-							className='w-5 h-5'
-							fill='currentColor'
-							viewBox='0 0 20 20'
-							xmlns='http://www.w3.org/2000/svg'>
-							<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
-						</svg>
-					</button>
-					<div className='hidden relative md:block'>
-						<div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+		<nav className='sticky top-0 z-40 w-full bg-slate-900 flex-none transition-colors duration-500 lg:z-50  '>
+			<div className='w-full container mx-auto bg-salte-900'>
+				<div className='flex items-center px-10 lg:px-42 md:px-20 py-4'>
+					<div className='w-3/12 md:hidden'>
+						<button onClick={handleCanvas}>
 							<svg
-								className='w-5 h-5 text-gray-500'
-								fill='currentColor'
-								viewBox='0 0 20 20'
-								xmlns='http://www.w3.org/2000/svg'>
-								<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-6 w-6'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='white'
+								strokeWidth='2'>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									d='M4 6h16M4 12h16M4 18h16'
+								/>
 							</svg>
-						</div>
-						<input
-							type='text'
-							className='block p-2 pl-10 w-full text-blue-900 bg-white rounded-xl focus:outline-none'
-							placeholder='Search...'
-						/>
+						</button>
 					</div>
-					<button
-						type='button'
-						className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-						onClick={handleClick}>
-						<svg
-							className='w-6 h-6'
-							fill='currentColor'
-							viewBox='0 0 20 20'
-							xmlns='http://www.w3.org/2000/svg'>
-							<path d='M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z'></path>
-						</svg>
-						<svg
-							className='hidden w-6 h-6'
-							fill='currentColor'
-							viewBox='0 0 20 20'
-							xmlns='http://www.w3.org/2000/svg'>
-							<path d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'></path>
-						</svg>
-					</button>
-				</div>
-				<div
-					className={`${
-						open ? "block" : "hidden"
-					} justify-between items-center w-full md:flex md:w-auto md:order-1`}
-					id='mobile-menu-3'>
-					<div className='relative mt-3 md:hidden'>
-						<div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+					<div className='md:w-2/12 w-6/12'>
+						<Link href='/'>
+							<a className='flex items-center justify-center md:justify-start text-gray-200 font-black'>
+								BLOGGER
+							</a>
+						</Link>
+					</div>
+					<div className='w-3/12 md:hidden text-right'>
+						<button onClick={handleSearch}>
 							<svg
-								className='w-5 h-5 text-gray-500'
-								fill='currentColor'
-								viewBox='0 0 20 20'
-								xmlns='http://www.w3.org/2000/svg'>
-								<path d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'></path>
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-6 w-6'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='white'
+								strokeWidth='2'>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+								/>
 							</svg>
-						</div>
-						<input
-							type='text'
-							id='search-navbar'
-							className='block p-2 pl-10 w-full text-gray-900 bg-white rounded-lg border '
-							placeholder='Search...'
-						/>
+						</button>
 					</div>
-					<ul className='flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium'>
-						<li>
-							<Link href='/'>
-								<a
-									className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'
-									aria-current='page'>
-									Home
-								</a>
-							</Link>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'>
-								About
-							</a>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:p-0'>
-								Services
-							</a>
-						</li>
-					</ul>
+					<div
+						className={`md:w-7/12 bg-slate-900 lg:bg-none w-full fixed md:static top-0 h-full md:h-auto p-10 md:p-0 transition-all ${
+							offcavnas ? "left-0" : "-left-full"
+						}`}>
+						<button
+							className='absolute top-10 right-10 md:hidden'
+							onClick={handleCanvas}>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-6 w-6'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='white'
+								strokeWidth='2'>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									d='M6 18L18 6M6 6l12 12'
+								/>
+							</svg>
+						</button>
+						<ul className='flex flex-col mt-4 md:justify-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium'>
+							<li>
+								<Link href='/posts'>
+									<a className='block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0'>
+										UI Design
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href='/posts'>
+									<a className='block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0'>
+										Front-End
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href='/posts'>
+									<a className='block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0'>
+										Back-End
+									</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+					<div
+						className={`md:w-3/12 absolute md:static w-full left-0 px-10 md:px-0 transition-all ${
+							search ? "top-10" : "-top-40"
+						}`}>
+						<div className='relative p-4 mt-4 rounded-lg md:p-0 md:mt-0 md:bg-none md:rounded-none'>
+							<button
+								className='absolute top-6 right-6 md:hidden focus:outline-none'
+								onClick={handleSearch}>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									width='24'
+									height='24'
+									viewBox='0 0 24 24'
+									fill='none'
+									stroke='black'
+									strokeWidth='2'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									className='feather feather-x'>
+									<line x1='18' y1='6' x2='6' y2='18'></line>
+									<line x1='6' y1='6' x2='18' y2='18'></line>
+								</svg>
+							</button>
+							<input
+								className='bg-white py-2 px-6 w-full text-blue-900 font-semibold md:rounded-xl rounded-lg focus:outline-none'
+								placeholder='Search ...'
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>

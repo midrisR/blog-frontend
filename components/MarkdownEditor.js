@@ -1,13 +1,13 @@
-import dynamic from "next/dynamic";
-import "react-markdown-editor-lite/lib/index.css";
-import RenderMd from "./Md";
+import dynamic from 'next/dynamic';
+import 'react-markdown-editor-lite/lib/index.css';
+import RenderMd from './Md';
 
 const MdEditor = dynamic(
 	() => {
 		return new Promise((resolve) => {
 			Promise.all([
-				import("react-markdown-editor-lite"),
-				import("./plugins/imageUpload"),
+				import('react-markdown-editor-lite'),
+				import('./plugins/imageUpload'),
 			]).then((res) => {
 				res[0].default.use(res[1].default);
 				resolve(res[0].default);
@@ -43,13 +43,13 @@ function Markdown({ defaultValue, handleEditorChange }) {
 					maxRow: 5,
 					maxCol: 6,
 				},
-				syncScrollMode: ["leftFollowRight", "rightFollowLeft"],
+				syncScrollMode: ['leftFollowRight', 'rightFollowLeft'],
 			}}
-			className='w-full'
+			className="w-full"
 			onImageUpload={onImageUpload}
-			name='content'
+			name="content"
 			defaultValue={defaultValue}
-			style={{ height: "500px" }}
+			style={{ height: '500px' }}
 			renderHTML={(text) => <RenderMd markdown={text} />}
 			onChange={handleEditorChange}
 		/>
