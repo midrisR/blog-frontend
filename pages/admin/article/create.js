@@ -17,6 +17,7 @@ export default function Create({ token }) {
 		title: '',
 		cover: '',
 		content: '',
+		tag: '',
 		active: false,
 		featured: false,
 	});
@@ -52,6 +53,7 @@ export default function Create({ token }) {
 		body.append('cover', field.cover);
 		body.append('title', field.title);
 		body.append('content', field.content);
+		body.append('tag', field.tag);
 		body.append('active', field.active);
 		body.append('featured', field.featured);
 		axios('http://localhost:5000/api/article', {
@@ -90,6 +92,15 @@ export default function Create({ token }) {
 							onChange={uploadToClient}
 						/>
 					</div>
+				</div>
+				<div className="w-1/2 mb-4 px-2">
+					<label className="block text-gray-700 text-sm font-bold mb-2">Tag</label>
+					<input
+						onChange={handleChange}
+						type="text"
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						name="tag"
+					/>
 				</div>
 				<div className="flex px-2 w-1/2 justify-between">
 					<div className="flex">

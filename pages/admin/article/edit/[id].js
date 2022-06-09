@@ -1,10 +1,10 @@
-import Markdown from "../../../../components/MarkdownEditor";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Admin from "../../../../components/layouts/admin";
-import cookies from "next-cookies";
-import { authPageAdmin } from "../../../../middleware/auth";
-import Router from "next/router";
+import Markdown from '../../../../components/MarkdownEditor';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Admin from '../../../../components/layouts/admin';
+import cookies from 'next-cookies';
+import { authPageAdmin } from '../../../../middleware/auth';
+import Router from 'next/router';
 export async function getServerSideProps(ctx) {
 	await authPageAdmin(ctx);
 	const { token } = cookies(ctx);
@@ -22,17 +22,17 @@ export default function Edit({ article, token, id }) {
 		content: article.content,
 		active: article.active,
 		featured: article.featured,
+		tag: article.tag,
 	});
 
 	useEffect(() => {
-		let file = document.getElementsByName("cover")[0];
+		let file = document.getElementsByName('cover')[0];
 		function FileListItems(files) {
-			var b = new ClipboardEvent("").clipboardData || new DataTransfer();
-			for (var i = 0, len = files.length; i < len; i++)
-				b.items.add(files[i]);
+			var b = new ClipboardEvent('').clipboardData || new DataTransfer();
+			for (var i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
 			return b.files;
 		}
-		let files = [new File(["content"], article.cover)];
+		let files = [new File(['content'], article.cover)];
 		file.files = new FileListItems(files);
 	}, []);
 
@@ -65,64 +65,72 @@ export default function Edit({ article, token, id }) {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+
 		const body = new FormData();
-		body.append("cover", field.cover);
-		body.append("title", field.title);
-		body.append("content", field.content);
-		body.append("active", field.active);
-		body.append("featured", field.featured);
-		body.append("slug", article.slug);
+		body.append('cover', field.cover);
+		body.append('title', field.title);
+		body.append('content', field.content);
+		body.append('active', field.active);
+		body.append('featured', field.featured);
+		body.append('slug', article.slug);
+		body.append('tag', field.tag);
 		await axios(`http://localhost:5000/api/article/${id}`, {
-			method: "PUT",
+			method: 'PUT',
 			data: body,
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		Router.push("/admin/article");
+		Router.push('/admin/article');
 	};
 
 	return (
-		<div className='bg-white min-h-screen'>
-			<div className='p-20'>
-				<div className='w-full flex wrap'>
-					<div className='w-1/2 mb-4 px-2'>
-						<label className='block text-gray-700 text-sm font-bold mb-2'>
-							Title
-						</label>
+		<div className="bg-white min-h-screen">
+			<div className="p-20">
+				<div className="w-full flex wrap">
+					<div className="w-1/2 mb-4 px-2">
+						<label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
 						<input
-							type='text'
-							className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-							name='title'
+							type="text"
+							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							name="title"
 							defaultValue={article.title}
 							onChange={handleChange}
 						/>
 					</div>
-					<div className='w-1/2 mb-4 px-2'>
-						<label className='block text-gray-700 text-sm font-bold mb-2'>
-							Cover
-						</label>
+					<div className="w-1/2 mb-4 px-2">
+						<label className="block text-gray-700 text-sm font-bold mb-2">Cover</label>
 						<input
-							type='file'
-							name='cover'
-							className='shadow block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-500 bg-white rounded overflow-hidden ocus:outline-none focus:shadow-outline'
+							type="file"
+							name="cover"
+							className="shadow block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-500 bg-white rounded overflow-hidden ocus:outline-none focus:shadow-outline"
 							onChange={uploadToClient}
 						/>
 					</div>
 				</div>
-
-				<div className='flex px-2 w-1/2 justify-between'>
-					<div className='flex'>
-						<label className='block text-gray-700 text-sm font-bold mb-2 mr-3'>
+				<div className="w-1/2 mb-4 px-2">
+					<label className="block text-gray-700 text-sm font-bold mb-2">Tag</label>
+					<input
+						onChange={handleChange}
+						type="text"
+						defaultValue={article.tag}
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						placeholder="tag 1, tag 2, tag 3"
+						name="tag"
+					/>
+				</div>
+				<div className="flex px-2 w-1/2 justify-between">
+					<div className="flex">
+						<label className="block text-gray-700 text-sm font-bold mb-2 mr-3">
 							Active
 						</label>
-						<div className='form-check form-switch'>
-							<label className='inline-flex relative items-center cursor-pointer'>
+						<div className="form-check form-switch">
+							<label className="inline-flex relative items-center cursor-pointer">
 								<input
-									type='checkbox'
-									name='active'
+									type="checkbox"
+									name="active"
 									defaultValue={article.active}
-									className='sr-only peer'
+									className="sr-only peer"
 									checked={field.active}
 									onChange={handleChecked}
 								/>
@@ -131,17 +139,17 @@ export default function Edit({ article, token, id }) {
 						</div>
 					</div>
 					{/* featured */}
-					<div className='flex'>
-						<label className='block text-gray-700 text-sm font-bold mb-2 mr-3'>
+					<div className="flex">
+						<label className="block text-gray-700 text-sm font-bold mb-2 mr-3">
 							Featured
 						</label>
-						<div className='form-check form-switch'>
-							<label className='inline-flex relative items-center cursor-pointer'>
+						<div className="form-check form-switch">
+							<label className="inline-flex relative items-center cursor-pointer">
 								<input
-									type='checkbox'
-									name='featured'
+									type="checkbox"
+									name="featured"
 									defaultValue={article.featured}
-									className='sr-only peer'
+									className="sr-only peer"
 									checked={field.featured}
 									onChange={handleChecked}
 								/>
@@ -150,16 +158,14 @@ export default function Edit({ article, token, id }) {
 						</div>
 					</div>
 				</div>
-				<div className='mb-4'>
-					<span className='text-white block'>content</span>
+				<div className="mb-4">
+					<span className="text-white block">content</span>
 					<Markdown
 						defaultValue={article.content}
 						handleEditorChange={handleGetMdValue}
 					/>
 				</div>
-				<button
-					className='px-4 py-3 rounded-lg bg-blue-200'
-					onClick={onSubmit}>
+				<button className="px-4 py-3 rounded-lg bg-blue-200" onClick={onSubmit}>
 					submit
 				</button>
 			</div>
