@@ -1,4 +1,4 @@
-import cookies from "next-cookies";
+import cookies from 'next-cookies';
 
 // check if user is not login and try to access admin page
 export function authPageAdmin(ctx) {
@@ -7,10 +7,12 @@ export function authPageAdmin(ctx) {
 		if (!allCookies.token)
 			return ctx.res
 				.writeHead(302, {
-					Location: "/auth/login",
+					Location: '/auth/login',
 				})
 				.end();
-		return resolve("unauthorized");
+		return resolve({
+			token: allCookies.token,
+		});
 	});
 }
 
@@ -21,9 +23,9 @@ export function authPage(ctx) {
 		if (allCookies.token)
 			return ctx.res
 				.writeHead(302, {
-					Location: "/admin",
+					Location: '/admin',
 				})
 				.end();
-		return resolve("unauthorized");
+		return resolve('unauthorized');
 	});
 }

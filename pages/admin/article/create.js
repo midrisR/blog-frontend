@@ -71,11 +71,11 @@ export default function Create({ token }) {
 			});
 	};
 	return (
-		<div className="bg-white min-h-screen">
+		<div className="bg-slate-800 rounded-xl min-h-screen">
 			<div className="p-20">
 				<div className="w-full flex wrap">
 					<div className="w-1/2 mb-4 px-2">
-						<label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+						<label className="block text-slate-200 text-sm font-bold mb-2">Title</label>
 						<input
 							onChange={handleChange}
 							type="text"
@@ -84,7 +84,7 @@ export default function Create({ token }) {
 						/>
 					</div>
 					<div className="w-1/2 mb-4 px-2">
-						<label className="block text-gray-700 text-sm font-bold mb-2">Cover</label>
+						<label className="block text-slate-200 text-sm font-bold mb-2">Cover</label>
 						<input
 							type="file"
 							name="cover"
@@ -94,7 +94,7 @@ export default function Create({ token }) {
 					</div>
 				</div>
 				<div className="w-1/2 mb-4 px-2">
-					<label className="block text-gray-700 text-sm font-bold mb-2">Tag</label>
+					<label className="block text-slate-200 text-sm font-bold mb-2">Tag</label>
 					<input
 						onChange={handleChange}
 						type="text"
@@ -104,7 +104,7 @@ export default function Create({ token }) {
 				</div>
 				<div className="flex px-2 w-1/2 justify-between">
 					<div className="flex">
-						<label className="block text-gray-700 text-sm font-bold mb-2 mr-3">
+						<label className="block text-slate-200 text-sm font-bold mb-2 mr-3">
 							Active
 						</label>
 						<div className="form-check form-switch">
@@ -122,7 +122,7 @@ export default function Create({ token }) {
 					</div>
 					{/* featured */}
 					<div className="flex">
-						<label className="block text-gray-700 text-sm font-bold mb-2 mr-3">
+						<label className="block text-slate-200 text-sm font-bold mb-2 mr-3">
 							Featured
 						</label>
 						<div className="form-check form-switch">
@@ -139,8 +139,8 @@ export default function Create({ token }) {
 						</div>
 					</div>
 				</div>
-				<div className="mb-4">
-					<span className="text-white block">content</span>
+				<div className="mb-4 px-2 mt-6">
+					<label className="block text-slate-200 text-sm font-bold mb-2">Content</label>
 					<Markdown handleEditorChange={handleGetMdValue} />
 				</div>
 				<button className="px-4 py-3 rounded-lg bg-blue-200" onClick={onSubmit}>

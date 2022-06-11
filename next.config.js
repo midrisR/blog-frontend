@@ -1,14 +1,11 @@
-/** @type {import('next').NextConfig} */
-const withTM = require("next-transpile-modules")(["react-syntax-highlighter"]);
-const nextConfig = {
+const withTM = require('next-transpile-modules')(['react-syntax-highlighter']);
+
+module.exports = {
+	withTM,
 	images: {
-		domains: ["images.unsplash.com"],
+		domains: ['images.unsplash.com', 'localhost'],
 	},
 	compiler: {
 		styledComponents: true,
 	},
-};
-module.exports = {
-	withTM,
-	nextConfig,
 };
