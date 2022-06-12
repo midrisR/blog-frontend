@@ -88,7 +88,7 @@ export default function User({ user, token }) {
 		<>
 			<div className="flex justify-end mb-2">
 				<button className="bg-slate-900 text-slate-200 px-3 py-2" onClick={handleupdate}>
-					Update
+					{update ? 'Cancel' : 'Update profile'}
 				</button>
 			</div>
 			<div className="bg-slate-800 rounded-lg flex overflow-hidden">

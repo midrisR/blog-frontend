@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
-import Router from "next/router";
-import cookies from "next-cookies";
+import { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import Router from 'next/router';
+import cookies from 'next-cookies';
+import Input from '../../components/form/input';
+import Form from '../../components/form/form';
+import Button from '../../components/form/button';
+
 export const getServerSideProps = async (ctx) => {
 	const nextCookies = cookies(ctx);
 	if (nextCookies.token) {
 		return ctx.res
 			.writeHead(302, {
-				Location: "/admin",
+				Location: '/admin',
 			})
 			.end();
 	}
@@ -18,9 +22,10 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function Login() {
+	const [error, setError] = useState([]);
 	const [value, setValue] = useState({
-		email: "",
-		password: "",
+		email: '',
+		password: '',
 	});
 
 	const handleChange = (e) => {
@@ -33,69 +38,41 @@ export default function Login() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(value);
-		const url = "http://localhost:5000/api/user/login";
+		const url = 'http://localhost:5000/api/user/login';
 		try {
 			const res = await axios(url, {
-				method: "POST",
+				method: 'POST',
 				data: value,
 			});
-			Cookies.set("token", res.data.token, { path: "/" });
-			Router.push("/admin");
+			Cookies.set('token', res.data.token, { path: '/' });
+			Router.push('/admin');
 		} catch (error) {
-			console.log(error.response.data.message);
+			setError(error.response.data.message);
 		}
 	};
+
 	return (
-		<div className='h-screen bg-blue-100 flex justify-center items-center'>
-			<div className='w-full max-w-xs'>
-				<form
-					className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
-					onSubmit={handleSubmit}>
-					<div className='mb-4'>
-						<label className='block text-gray-700 text-sm font-bold mb-2'>
-							Email
-						</label>
-						<input
-							className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-							type='text'
-							name='email'
-							placeholder='Email'
-							onChange={handleChange}
-							autoComplete='off'
-						/>
-					</div>
-					<div className='mb-6'>
-						<label className='block text-gray-700 text-sm font-bold mb-2'>
-							Password
-						</label>
-						<input
-							className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
-							type='password'
-							name='password'
-							placeholder='******************'
-							onChange={handleChange}
-						/>
-						<p className='text-red-500 text-xs italic'>
-							Please choose a password.
-						</p>
-					</div>
-					<div className='flex items-center justify-between'>
-						<button
-							className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-							type='submit'>
-							Sign In
-						</button>
-						<a
-							className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
-							href='#'>
-							Forgot Password?
-						</a>
-					</div>
-				</form>
-				<p className='text-center text-gray-500 text-xs'>
-					&copy;2020 Acme Corp. All rights reserved.
-				</p>
+		<div className="h-screen bg-blue-100 flex justify-center items-center">
+			<div className="w-full max-w-xs">
+				<Form onSubmit={handleSubmit} error={error}>
+					<Input
+						type="text"
+						onChange={handleChange}
+						name="email"
+						placeholder="input your email"
+						autoComplete="off"
+						error={error['email']}
+					/>
+					<Input
+						type="password"
+						onChange={handleChange}
+						name="password"
+						placeholder="input your password"
+						error={error['password']}
+					/>
+					<div className="flex items-center justify-between"></div>
+					<Button type="submit" title="Log in" className="bg-slate-800" />
+				</Form>
 			</div>
 		</div>
 	);
