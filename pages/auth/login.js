@@ -52,7 +52,7 @@ export default function Login() {
 	};
 
 	return (
-		<div className="h-screen bg-blue-100 flex justify-center items-center">
+		<div className="h-screen bg-slate-100 flex justify-center items-center">
 			<div className="w-full max-w-xs">
 				<Form onSubmit={handleSubmit} error={error}>
 					<Input

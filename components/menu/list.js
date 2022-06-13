@@ -1,24 +1,14 @@
+import { GrArticle, GrUser } from 'react-icons/gr';
+import { MdArticle, MdPerson } from 'react-icons/md';
 export const List = [
 	{
 		title: 'Articles',
-		child: [
-			{
-				name: 'View Article',
-				url: '/admin/article',
-			},
-			{
-				name: 'Create Article',
-				url: '/admin/article/create',
-			},
-		],
+		url: '/admin/article',
+		icon: <MdArticle size={26} className="text-slate-300" />,
 	},
 	{
 		title: 'Users',
-		child: [
-			{
-				name: 'View User',
-				url: '/admin/user',
-			},
-		],
+		url: '/admin/user',
+		icon: <MdPerson size={26} className="text-slate-300" />,
 	},
 ];
