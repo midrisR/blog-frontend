@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ActiveLink from '../link/activeLink';
-import { List } from '../../components/menu/list';
-import { HiOutlineChevronDown } from 'react-icons/hi';
+import { List } from '../menu/list';
+// import { HiOutlineChevronDown } from 'react-icons/hi';
 export async function getServerSideProps(ctx) {
 	console.log(ctx);
 	return {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Admin from '../../../components/layouts/admin';
 import { authPageAdmin } from '../../../middleware/auth';
-
+import { MdEditNote, MdOutlineDelete } from 'react-icons/md';
 export async function getServerSideProps(ctx) {
 	await authPageAdmin(ctx);
 	const res = await axios.get('http://localhost:5000/api/article/');
@@ -22,8 +22,8 @@ export default function View({ articles }) {
 					</a>
 				</Link>
 			</div>
-			<div className="overflow-hidden rounded-xl">
-				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+			<div className="overflow-hidden rounded-2xl bg-white shadow-2xl">
+				<table className="w-full text-sm text-left">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3">
@@ -58,27 +58,29 @@ export default function View({ articles }) {
 									</td>
 									<td
 										className={`px-6 py-4 font-bold whitespace-nowrap ${
-											article.active ? 'text-green-700' : 'text-red-500'
+											article.active ? 'text-blue-500' : 'text-red-400'
 										}`}>
 										{new Boolean(article.active).toString()}
 									</td>
 									<td
-										className={`px-6 py-4 whitespace-nowrap font-bold ${
-											article.featured ? 'text-green-700' : 'text-red-500'
+										className={`px-6 py-4 whitespace-nowrap font-semibold ${
+											article.featured ? 'text-blue-500' : 'text-red-400'
 										}`}>
 										{new Boolean(article.featured).toString()}
 									</td>
 									<td className="px-6 py-4 whitespace-nowrap">{newDate}</td>
-									<td className="px-6 py-4 whitespace-nowrap">
+									<td className="px-6 py-4 flex gap-2 whitespace-nowrap">
 										<Link href={`/admin/article/edit/${article._id}`}>
-											<a className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-												Edit
+											<a className="text-white bg-blue-500 hover:bg-blue-700 font-medium rounded-lg flex justify-center items-center p-1.5 focus:outline-none">
+												<MdEditNote size="24" color="white" />
+												<span className="px-1.5">edit</span>
 											</a>
 										</Link>
 										<button
 											type="button"
-											className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-											Red
+											className="text-white bg-red-500 hover:bg-red-700 rounded-lg  flex justify-center items-center p-1.5 focus:outline-none">
+											<MdOutlineDelete size="20" color="white" />
+											<span className="px-2">delete</span>
 										</button>
 									</td>
 								</tr>

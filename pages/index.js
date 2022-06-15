@@ -11,7 +11,7 @@ export async function getServerSideProps() {
 
 export default function Home({ articles }) {
 	return (
-		<div className="w-full flex flex-wrap px-16 my-10 md:my-20 gap-16 md:gap-12">
+		<div className="w-full flex flex-wrap justify-center px-16 my-10 md:my-20 gap-16 md:gap-12">
 			<ArticleCard articles={articles} />
 		</div>
 	);

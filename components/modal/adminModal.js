@@ -2,9 +2,8 @@ export default function Modal({ show, children, onClose }) {
 	return (
 		<div className={`w-full ${show ? 'flex' : 'hidden'} justify-center absolute top-20 z-50`}>
 			<div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
-				<div className="relative bg-slate-800 rounded-lg shadow-xl">
+				<div className="relative bg-white rounded-xl shadow-xl">
 					<div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-						<h3 className="text-xl font-semibold text-slate-200">Terms of Service</h3>
 						<button
 							type="button"
 							className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"

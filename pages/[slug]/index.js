@@ -25,7 +25,11 @@ export default function DetailArticle({ article }) {
 	return (
 		<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
 			<div className="py-20 prose prose-pre:bg-slate-900 prose-a:text-yellow-600 prose-headings:text-gray-200 prose-ul:text-gray-200 prose-li:text-gray-200 prose-p:text-gray-300 md:prose-lg lg:prose-img:my-0 prose-img:my-0 max-w-none">
-				<h1 className="text-gray-200 text-6xl font-black mb-10">{article.title} </h1>
+				<div className="mb-10">
+					<h1 className="text-gray-200 text-6xl font-black mb-2">{article.title} </h1>
+					<span className="text-sm text-slate-200 italic">Tag : {article.tag}</span>
+				</div>
+
 				<img
 					src={`http://localhost:5000/uploads/${article.cover}`}
 					className="mb-5"

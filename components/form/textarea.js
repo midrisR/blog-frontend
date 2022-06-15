@@ -3,7 +3,7 @@ import HandleError from './error';
 export default function Textarea({ error, ...props }) {
 	return (
 		<div className="mb-2 px-2">
-			<label className="block text-slate-200 text-sm font-bold mb-2 capitalize">
+			<label className="block text-slate-700 text-sm font-bold mb-2 capitalize">
 				{props.name}
 			</label>
 			<textarea

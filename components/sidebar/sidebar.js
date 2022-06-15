@@ -38,7 +38,8 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
 	useEffect(() => {
 		window.addEventListener('resize', (e) => {
-			if (e.target.width > 768) setSidebarOpen(false);
+			console.log(e.target.screen.width);
+			if (e.target.screen.width > 768) setSidebarOpen(false);
 		});
 		localStorage.setItem('sidebar-expanded', sidebarExpanded);
 		setStoredSidebarExpanded(localStorage.getItem('sidebar-expanded'));
@@ -141,7 +142,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 						<ul className="mt-3">
 							<li className="px-3 py-2 rounded-sm mb-0.5 last:mb-0">
 								<ActiveLink href="/admin" activeClassName="text-purple-400">
-									<a className="flex items-center text-slate-200 py-2 hover:text-white truncate transition duration-150">
+									<a className="flex items-center text-slate-200 hover:text-white truncate transition duration-150">
 										<MdSpaceDashboard className="shrink-0 h-6 w-6 text-slate-400" />
 										<span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
 											Dashboard
