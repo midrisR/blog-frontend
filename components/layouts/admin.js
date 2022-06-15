@@ -1,16 +1,16 @@
-import Navbar from '../../components/navbar/adminNavbar';
-import Sidebar from '../../components/sidebar/sidebar';
+import { useState } from 'react';
+import Sidebar from '../sidebar/sidebar';
+import Header from '../header/header';
 
 export default function Admin({ children }) {
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 	return (
-		<>
-			<Sidebar />
-			<div className="relative md:ml-64 bg-slate-900">
-				<Navbar />
-				<div className="px-4 md:px-10 mx-auto w-full min-h-screen">
-					<main className="  relative bg-blueGray-800 md:pt-32 pt-12">{children}</main>
-				</div>
+		<div className="flex h-screen overflow-hidden">
+			<Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+			<div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+				<Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+				<main className="px-10 py-8">{children}</main>
 			</div>
-		</>
+		</div>
 	);
 }

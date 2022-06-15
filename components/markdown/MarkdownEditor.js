@@ -7,7 +7,7 @@ const MdEditor = dynamic(
 		return new Promise((resolve) => {
 			Promise.all([
 				import('react-markdown-editor-lite'),
-				import('./plugins/imageUpload'),
+				import('../plugins/imageUpload'),
 			]).then((res) => {
 				res[0].default.use(res[1].default);
 				resolve(res[0].default);

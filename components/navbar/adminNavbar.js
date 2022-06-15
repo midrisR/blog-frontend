@@ -4,11 +4,11 @@ export default function Navbar() {
 	return (
 		<>
 			{/* Navbar */}
-			<nav className="fixed top-0 md:left-64 w-full z-10 bg-slate-800 shadow-lg md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+			<nav className="fixed top-0 md:left-64 w-full z-10 bg-white shadow-lg md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
 				<div className="w-full mx-auto items-center flex justify-between flex-wrap md:px-10 px-4">
 					{/* Brand */}
 					<a
-						className="text-slate-200 text-sm uppercase hidden lg:inline-block font-semibold"
+						className="text-slate-700 text-sm uppercase hidden lg:inline-block font-semibold"
 						href="#pablo"
 						onClick={(e) => e.preventDefault()}>
 						Dashboard

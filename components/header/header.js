@@ -1,66 +1,67 @@
-import CardStats from "../../components/card/card";
+import { useState } from 'react';
+import SearchModal from '../sidebar/SearchModal';
 
-export default function HeaderStats() {
+export default function Header({ sidebarOpen, setSidebarOpen }) {
+	const [searchModalOpen, setSearchModalOpen] = useState(false);
 	return (
-		<>
-			{/* Header */}
-			<div className='relative bg-blueGray-800 md:pt-32 pb-32 pt-12'>
-				<div className='px-4 md:px-10 mx-auto w-full'>
-					<div>
-						{/* Card stats */}
-						<div className='flex flex-wrap'>
-							<div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
-								<CardStats
-									statSubtitle='TRAFFIC'
-									statTitle='350,897'
-									statArrow='up'
-									statPercent='3.48'
-									statPercentColor='text-emerald-500'
-									statDescripiron='Since last month'
-									statIconName='far fa-chart-bar'
-									statIconColor='bg-red-500'
+		<nav className="sticky top-0 bg-white border-b border-slate-200 z-30">
+			<div className="px-4 sm:px-6 lg:px-8">
+				<div className="flex items-center justify-between h-16 -mb-px">
+					{/* Header: Left side */}
+					<div className="flex">
+						{/* Hamburger button */}
+						<button
+							className=" hover:text-slate-600 lg:hidden"
+							aria-controls="sidebar"
+							aria-expanded={sidebarOpen}
+							onClick={() => setSidebarOpen(true)}>
+							<span className="sr-only">Open sidebar</span>
+							<svg
+								className="w-6 h-6 fill-current text-purple-500"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg">
+								<rect x="4" y="5" width="16" height="2" />
+								<rect x="4" y="11" width="16" height="2" />
+								<rect x="4" y="17" width="16" height="2" />
+							</svg>
+						</button>
+					</div>
+
+					{/* Header: Right side */}
+					<div className="flex items-center">
+						<button
+							className={`w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3 ${
+								searchModalOpen && 'bg-slate-200'
+							}`}
+							onClick={(e) => {
+								e.stopPropagation();
+								setSearchModalOpen(true);
+							}}
+							aria-controls="search-modal">
+							<span className="sr-only">Search</span>
+							<svg
+								className="w-4 h-4"
+								viewBox="0 0 16 16"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									className="fill-current text-slate-500"
+									d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z"
 								/>
-							</div>
-							<div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
-								<CardStats
-									statSubtitle='NEW USERS'
-									statTitle='2,356'
-									statArrow='down'
-									statPercent='3.48'
-									statPercentColor='text-red-500'
-									statDescripiron='Since last week'
-									statIconName='fas fa-chart-pie'
-									statIconColor='bg-orange-500'
+								<path
+									className="fill-current text-slate-400"
+									d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z"
 								/>
-							</div>
-							<div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
-								<CardStats
-									statSubtitle='SALES'
-									statTitle='924'
-									statArrow='down'
-									statPercent='1.10'
-									statPercentColor='text-orange-500'
-									statDescripiron='Since yesterday'
-									statIconName='fas fa-users'
-									statIconColor='bg-pink-500'
-								/>
-							</div>
-							<div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
-								<CardStats
-									statSubtitle='PERFORMANCE'
-									statTitle='49,65%'
-									statArrow='up'
-									statPercent='12'
-									statPercentColor='text-emerald-500'
-									statDescripiron='Since last month'
-									statIconName='fas fa-percent'
-									statIconColor='bg-lightBlue-500'
-								/>
-							</div>
-						</div>
+							</svg>
+						</button>
+						<SearchModal
+							id="search-modal"
+							searchId="search"
+							modalOpen={searchModalOpen}
+							setModalOpen={setSearchModalOpen}
+						/>
 					</div>
 				</div>
 			</div>
-		</>
+		</nav>
 	);
 }

@@ -1,9 +1,9 @@
 import HandleError from './error';
 
-export default function Input({ error, ...props }) {
+export default function Input({ error, className, ...props }) {
 	return (
-		<div className="mb-4">
-			<label className="block text-slate-200 text-sm font-bold mb-2 capitalize">
+		<div className={className + ' mb-4'}>
+			<label className="block text-slate-700 text-sm font-bold mb-2 capitalize">
 				{props.name}
 			</label>
 			<input

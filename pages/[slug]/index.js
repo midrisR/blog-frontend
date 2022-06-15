@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import RenderMd from '../../components/Md';
+import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
 import { HiOutlineHeart, HiHeart, HiOutlineShare } from 'react-icons/hi';
 

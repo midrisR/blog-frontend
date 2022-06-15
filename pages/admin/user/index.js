@@ -7,7 +7,7 @@ import { AiFillGithub, AiFillYoutube, AiOutlineTwitter, AiFillFacebook } from 'r
 import { useRouter } from 'next/router';
 import Input from '../../../components/form/input';
 import Textarea from '../../../components/form/textarea';
-import Modal from '../../../components/form/modal';
+import Modal from '../../../components/modal/adminModal';
 
 export async function getServerSideProps(ctx) {
 	const { token } = await authPageAdmin(ctx);
@@ -92,7 +92,9 @@ export default function User({ user, token }) {
 	return (
 		<>
 			<div className="flex justify-end mb-2">
-				<button className="bg-slate-900 text-slate-200 px-3 py-2" onClick={handleupdate}>
+				<button
+					className="text-slate-700 bg-slate-300 hover:bg-slate-400 hover:text-gray-900 rounded-lg text-sm p-2.5 ml-auto inline-flex items-center"
+					onClick={handleupdate}>
 					Update profile
 				</button>
 			</div>
@@ -112,6 +114,7 @@ export default function User({ user, token }) {
 					onChange={handleChange}
 					defaultValue={user.about}
 					error={error['about']}
+					rows="4"
 				/>
 				<div className="flex flex-wrap lg:my-0">
 					{Object.keys(field.socialMedia).map((input, i) => (
@@ -135,7 +138,7 @@ export default function User({ user, token }) {
 					</button>
 				</div>
 			</Modal>
-			<div className="bg-slate-800 rounded-lg flex overflow-hidden">
+			<div className="bg-white rounded-lg flex overflow-hidden">
 				<div className="w-2/6">
 					<img
 						src={`http://localhost:5000/uploads/user/${user.avatar}`}
@@ -144,14 +147,14 @@ export default function User({ user, token }) {
 				</div>
 
 				<div className="w-5/6 mt-2 px-10">
-					<h3 className="py-4 text-xl text-slate-200 font-bold">{user.name}</h3>
-					<blockquote className="bg-slate-300 px-8 py-3 rounded-lg italic text-slate-100 bg-opacity-25 border-l-8 border-l-slate-500">
+					<h3 className="py-4 text-xl text-slate-700 font-bold">{user.name}</h3>
+					<blockquote className="bg-white px-8 py-3 rounded-lg italic shadow-xl text-slate-700 bg-opacity-25 border-l-8 border-l-slate-500">
 						<p>{user.about}</p>
 					</blockquote>
 
 					<div className="mt-4">
 						<Link href={`https://github.com/${user.socialMedia.github}`}>
-							<a className="flex items-center mb-4 text-slate-200">
+							<a className="flex items-center mb-4 text-slate-700">
 								<AiFillGithub size={24} />
 								<span className="ml-2">{user.socialMedia.github}</span>
 							</a>
