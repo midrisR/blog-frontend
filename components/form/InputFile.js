@@ -1,7 +1,6 @@
 import HandleError from './error';
 
 export default function InputFile({ error, className, ...props }) {
-	console.log(error ? 'true' : 'false');
 	return (
 		<div className={className + ' mb-4'}>
 			<label className="block text-slate-700 text-sm font-bold mb-2 capitalize">

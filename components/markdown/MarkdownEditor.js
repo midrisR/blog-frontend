@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-markdown-editor-lite/lib/index.css';
 import RenderMd from './Md';
-
+import axios from 'axios';
 const MdEditor = dynamic(
 	() => {
 		return new Promise((resolve) => {
@@ -19,14 +20,29 @@ const MdEditor = dynamic(
 	}
 );
 function Markdown({ defaultValue, handleEditorChange }) {
-	const onImageUpload = (file, callback) => {
-		const reader = new FileReader();
-		reader.onload = (data) => {
-			setTimeout(() => {
-				callback(data.target.result);
-			}, 1000);
-		};
-		reader.readAsDataURL(file);
+	const [error, setError] = useState([]);
+
+	const onImageUpload = async (file, callback) => {
+		const formData = new FormData();
+		formData.append('file', file);
+
+		const match = ['image/png', 'image/jpeg', 'image/jpg'];
+
+		if (match.indexOf(file.type) === -1) {
+			alert('file must be .png, .jpg and .jpeg format allowed!');
+			return;
+		}
+
+		try {
+			const data = await axios.post('http://localhost:5000/api/image', formData);
+			callback(data.data.file);
+		} catch (error) {
+			setError(() => ({
+				status: true,
+				message: error.response.data.message,
+			}));
+			callback(null);
+		}
 	};
 
 	return (
@@ -45,8 +61,9 @@ function Markdown({ defaultValue, handleEditorChange }) {
 				},
 				syncScrollMode: ['leftFollowRight', 'rightFollowLeft'],
 			}}
-			className="w-full"
 			onImageUpload={onImageUpload}
+			imageAccept=".jpg,.png"
+			className="w-full"
 			name="content"
 			defaultValue={defaultValue}
 			style={{ height: '500px' }}

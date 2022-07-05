@@ -1,4 +1,27 @@
 import cookies from 'next-cookies';
+import axios from 'axios';
+
+export async function validatsiToken(ctx) {
+	const { token } = cookies(ctx);
+	try {
+		await axios.get('http://localhost:5000/api/user/me', {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	} catch (error) {
+		if (error.response.status === 401)
+			ctx.res.setHeader('Set-Cookie', [
+				`token=deleted; Max-Age=0`,
+				`AnotherCookieName=deleted; Max-Age=0`,
+			]);
+		return ctx.res
+			.writeHead(302, {
+				Location: '/auth/login',
+			})
+			.end();
+	}
+}
 
 // check if user is not login and try to access admin page
 export function authPageAdmin(ctx) {

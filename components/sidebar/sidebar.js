@@ -10,7 +10,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 	const [sidebarExpanded, setSidebarExpanded] = useState(
 		storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
 	);
-	// close on click outside
+
 	useEffect(() => {
 		const clickHandler = ({ target }) => {
 			if (!sidebar.current) return;
@@ -38,11 +38,9 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
 	useEffect(() => {
 		window.addEventListener('resize', (e) => {
-			console.log(e.target.screen.width);
 			if (e.target.screen.width > 768) setSidebarOpen(false);
 		});
 		localStorage.setItem('sidebar-expanded', sidebarExpanded);
-		setStoredSidebarExpanded(localStorage.getItem('sidebar-expanded'));
 		if (sidebarExpanded) {
 			document.querySelector('body').classList.add('sidebar-expanded');
 		} else {

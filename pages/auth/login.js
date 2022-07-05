@@ -6,16 +6,9 @@ import cookies from 'next-cookies';
 import Input from '../../components/form/input';
 import Form from '../../components/form/form';
 import Button from '../../components/form/button';
-
+import { authPage } from '../../middleware/auth';
 export const getServerSideProps = async (ctx) => {
-	const nextCookies = cookies(ctx);
-	if (nextCookies.token) {
-		return ctx.res
-			.writeHead(302, {
-				Location: '/admin',
-			})
-			.end();
-	}
+	await authPage(ctx);
 	return {
 		props: {},
 	};
@@ -71,7 +64,11 @@ export default function Login() {
 						error={error['password']}
 					/>
 					<div className="flex items-center justify-between"></div>
-					<Button type="submit" title="Log in" className="bg-slate-800" />
+					<Button
+						type="submit"
+						title="Log in"
+						className="bg-slate-800 text-slate-200 px-4 py-2 rounded-lg"
+					/>
 				</Form>
 			</div>
 		</div>
