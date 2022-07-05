@@ -8,7 +8,7 @@ import Admin from '../../../../components/layouts/admin';
 
 // form
 import Input from '../../../../components/form/input';
-import InputFile from '../../../../components/form/inputFile';
+import InputFile from '../../../../components/form/InputFile';
 import SwitchToggle from '../../../../components/form/switches';
 import Button from '../../../../components/form/button';
 
