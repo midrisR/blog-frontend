@@ -1,5 +1,4 @@
 import HandleError from './error';
-
 export default function InputFile({ error, className, ...props }) {
 	return (
 		<div className={className + ' mb-4'}>
