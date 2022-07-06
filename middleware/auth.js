@@ -4,7 +4,7 @@ import axios from 'axios';
 export async function validatsiToken(ctx) {
 	const { token } = cookies(ctx);
 	try {
-		await axios.get('http://localhost:5000/api/user/me', {
+		await axios.get('https://dhanio-blog.herokuapp.com/api/user/me', {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

@@ -26,23 +26,12 @@ export default function Edit({ article, token, id }) {
 	const [error, setError] = useState([]);
 	const [field, setField] = useState({
 		title: article.title,
-		cover: article.cover,
+		file: article.cover,
 		content: article.content,
 		active: article.active,
 		featured: article.featured,
 		tag: article.tag,
 	});
-
-	useEffect(() => {
-		let file = document.getElementsByName('cover')[0];
-		function FileListItems(files) {
-			var b = new ClipboardEvent('').clipboardData || new DataTransfer();
-			for (var i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
-			return b.files;
-		}
-		let files = [new File(['content'], article.cover)];
-		file.files = new FileListItems(files);
-	}, []);
 
 	const handleGetMdValue = ({ html, text }, event) => {
 		setField({ ...field, content: text });
@@ -75,7 +64,7 @@ export default function Edit({ article, token, id }) {
 		e.preventDefault();
 
 		const body = new FormData();
-		body.append('cover', field.cover);
+		body.append('file', field.cover);
 		body.append('title', field.title);
 		body.append('content', field.content);
 		body.append('active', field.active);
@@ -92,6 +81,7 @@ export default function Edit({ article, token, id }) {
 			});
 			Router.push('/admin/article');
 		} catch (error) {
+			console.log(error);
 			setError(error.response.data.message);
 		}
 	};
@@ -111,9 +101,9 @@ export default function Edit({ article, token, id }) {
 					/>
 					<InputFile
 						className="w-1/2"
-						name="cover"
+						name="file"
 						onChange={uploadToClient}
-						error={error['cover']}
+						error={error['file']}
 					/>
 				</div>
 				<Input

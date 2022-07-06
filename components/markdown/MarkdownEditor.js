@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import 'react-markdown-editor-lite/lib/index.css';
 import RenderMd from './Md';
 import axios from 'axios';
+import HandleError from '../form/error';
 const MdEditor = dynamic(
 	() => {
 		return new Promise((resolve) => {
@@ -19,7 +20,7 @@ const MdEditor = dynamic(
 		ssr: false,
 	}
 );
-function Markdown({ defaultValue, handleEditorChange }) {
+function Markdown({ defaultValue, handleEditorChange, name, mdError }) {
 	const [error, setError] = useState([]);
 
 	const onImageUpload = async (file, callback) => {
@@ -34,8 +35,9 @@ function Markdown({ defaultValue, handleEditorChange }) {
 		}
 
 		try {
-			const data = await axios.post('http://localhost:5000/api/image', formData);
-			callback(data.data.file);
+			const { data } = await axios.post('http://localhost:5000/api/image', formData);
+			console.log(data);
+			callback(data);
 		} catch (error) {
 			setError(() => ({
 				status: true,
@@ -46,30 +48,33 @@ function Markdown({ defaultValue, handleEditorChange }) {
 	};
 
 	return (
-		<MdEditor
-			config={{
-				view: {
-					menu: true,
-					md: true,
-					html: false,
-					fullScreen: false,
-					hideMenu: true,
-				},
-				table: {
-					maxRow: 5,
-					maxCol: 6,
-				},
-				syncScrollMode: ['leftFollowRight', 'rightFollowLeft'],
-			}}
-			onImageUpload={onImageUpload}
-			imageAccept=".jpg,.png"
-			className="w-full"
-			name="content"
-			defaultValue={defaultValue}
-			style={{ height: '500px' }}
-			renderHTML={(text) => <RenderMd markdown={text} />}
-			onChange={handleEditorChange}
-		/>
+		<div>
+			<MdEditor
+				config={{
+					view: {
+						menu: true,
+						md: true,
+						html: false,
+						fullScreen: false,
+						hideMenu: true,
+					},
+					table: {
+						maxRow: 5,
+						maxCol: 6,
+					},
+					syncScrollMode: ['leftFollowRight', 'rightFollowLeft'],
+				}}
+				onImageUpload={onImageUpload}
+				imageAccept=".jpg,.png"
+				className="w-full border border-red-800"
+				name={name}
+				defaultValue={defaultValue}
+				style={{ height: '500px' }}
+				renderHTML={(text) => <RenderMd markdown={text} />}
+				onChange={handleEditorChange}
+			/>
+			<HandleError error={mdError} field="content" />
+		</div>
 	);
 }
 export default Markdown;

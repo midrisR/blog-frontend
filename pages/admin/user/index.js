@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import Input from '../../../components/form/input';
 import Textarea from '../../../components/form/textarea';
 import Modal from '../../../components/modal/adminModal';
-
+import InputFile from '../../../components/form/InputFile';
 export async function getServerSideProps(ctx) {
 	const { token } = await authPageAdmin(ctx);
 
@@ -24,14 +24,14 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function User({ user, token }) {
-	console.log(user);
 	const [update, setUpdate] = useState(false);
 	const [error, setError] = useState([]);
 	const router = useRouter();
+
 	const [field, setField] = useState({
 		name: user.name,
 		about: user.about,
-		avatar: user.avatar,
+		file: user.avatar,
 		socialMedia: {
 			facebook: user.socialMedia.facebook,
 			instagram: user.socialMedia.instagram,
@@ -61,7 +61,12 @@ export default function User({ user, token }) {
 			[attr.name]: attr.value,
 		});
 	};
-
+	const uploadToClient = (event) => {
+		if (event.target.files && event.target.files[0]) {
+			const i = event.target.files[0];
+			setField({ ...field, file: i });
+		}
+	};
 	const handleSosmed = (e) => {
 		let data = field.socialMedia;
 		data[e.target.name] = e.target.value;
@@ -70,10 +75,11 @@ export default function User({ user, token }) {
 
 	const handleUpdate = async (e) => {
 		e.preventDefault();
+		console.log(JSON.stringify(field.socialMedia));
 		let formData = new FormData();
 		formData.append('name', field.name);
 		formData.append('about', field.about);
-		formData.append('avatar', field.avatar);
+		formData.append('file', field.file);
 		formData.append('socialMedia', JSON.stringify(field.socialMedia));
 		try {
 			await axios('http://localhost:5000/api/user/me/update', {
@@ -99,6 +105,7 @@ export default function User({ user, token }) {
 				</button>
 			</div>
 			<Modal show={update} onClose={handleUpdate}>
+				<InputFile name="file" error={error['file']} onChange={uploadToClient} />
 				<div className="w-1/2 mb-4 px-2">
 					<Input
 						type="text"
@@ -140,10 +147,7 @@ export default function User({ user, token }) {
 			</Modal>
 			<div className="bg-white rounded-lg flex overflow-hidden">
 				<div className="w-2/6">
-					<img
-						src={`http://localhost:5000/uploads/user/${user.avatar}`}
-						alt={user.name}
-					/>
+					<img src={user.avatar} alt={user.name} />
 				</div>
 
 				<div className="w-5/6 mt-2 px-10">

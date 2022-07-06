@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
 		<Auth0Provider
 			clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
 			domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}>
-			{getLayout(<Component {...pageProps} />)}
+			<div className="bg-slate-700">{getLayout(<Component {...pageProps} />)}</div>
 		</Auth0Provider>
 	);
 }

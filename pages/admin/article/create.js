@@ -8,7 +8,7 @@ import Input from '../../../components/form/input';
 import InputFile from '../../../components/form/InputFile';
 import SwitchToggle from '../../../components/form/switches';
 import Button from '../../../components/form/button';
-
+import Router from 'next/router';
 export async function getServerSideProps(ctx) {
 	await authPageAdmin(ctx);
 	const { token } = cookies(ctx);
@@ -20,7 +20,7 @@ export default function Create({ token }) {
 	const [error, setError] = useState([]);
 	const [field, setField] = useState({
 		title: '',
-		cover: '',
+		file: '',
 		content: '',
 		tag: '',
 		active: false,
@@ -33,7 +33,7 @@ export default function Create({ token }) {
 	const uploadToClient = (event) => {
 		if (event.target.files && event.target.files[0]) {
 			const i = event.target.files[0];
-			setField({ ...field, cover: i });
+			setField({ ...field, file: i });
 		}
 	};
 
@@ -55,7 +55,7 @@ export default function Create({ token }) {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const body = new FormData();
-		body.append('cover', field.cover);
+		body.append('file', field.file);
 		body.append('title', field.title);
 		body.append('content', field.content);
 		body.append('tag', field.tag);
@@ -69,7 +69,7 @@ export default function Create({ token }) {
 			},
 		})
 			.then((response) => {
-				console.log(response);
+				Router.push('/admin/article');
 			})
 			.catch(function (error) {
 				setError(error.response.data.message);
@@ -89,9 +89,9 @@ export default function Create({ token }) {
 					/>
 					<InputFile
 						className="w-1/2"
-						name="cover"
+						name="file"
 						onChange={uploadToClient}
-						error={error['cover']}
+						error={error['file']}
 					/>
 				</div>
 				<Input
@@ -117,8 +117,12 @@ export default function Create({ token }) {
 					/>
 				</div>
 				<div className="mb-4 px-2 mt-6">
-					<label className="block text-slate-200 text-sm font-bold mb-2">Content</label>
-					<Markdown handleEditorChange={handleGetMdValue} />
+					<label className="block text-slate-800 text-sm font-bold mb-2">Content</label>
+					<Markdown
+						handleEditorChange={handleGetMdValue}
+						name="content"
+						mdError={error['content']}
+					/>
 					<Button
 						title="Submit"
 						onClick={onSubmit}

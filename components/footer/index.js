@@ -1,6 +1,6 @@
 export default function Footer() {
 	return (
-		<div className="w-full container mx-auto p-4">
+		<footer className="w-full container mx-auto p-4">
 			<div className="flex flex-wrap">
 				<div className="w-1/2 text-white p-8">
 					this is a web created using node js as backend and next js as frontend
@@ -12,6 +12,6 @@ export default function Footer() {
 					praesentium repellat.
 				</div>
 			</div>
-		</div>
+		</footer>
 	);
 }

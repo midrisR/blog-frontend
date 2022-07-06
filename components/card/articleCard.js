@@ -16,13 +16,13 @@ export default function ArticleCard({ article }) {
 				<a className="w-full flex flex-col lg:block">
 					<img
 						className="hidden lg:block w-full"
-						src={`http://localhost:5000/uploads/${article.cover}`}
+						src={article.cover}
 						alt="Sunset in the mountains"
 					/>
 					<div className="flex items-center gap-3 lg:hidden p-4">
 						<img
 							className="w-10 h-10 rounded-full"
-							src={`http://localhost:5000/uploads/user/${article.user.avatar}`}
+							src={article.user.avatar}
 							alt="Sunset in the mountains"
 						/>
 						<div className="div">
