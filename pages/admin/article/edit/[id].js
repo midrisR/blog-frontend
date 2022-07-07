@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import cookies from 'next-cookies';
 import Router from 'next/router';
@@ -81,7 +81,6 @@ export default function Edit({ article, token, id }) {
 			});
 			Router.push('/admin/article');
 		} catch (error) {
-			console.log(error);
 			setError(error.response.data.message);
 		}
 	};

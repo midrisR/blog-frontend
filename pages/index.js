@@ -3,6 +3,7 @@ import ArticleCard from '../components/card/articleCard';
 import axios from 'axios';
 import Layout from '../components/layouts';
 import FeaturedCard from '../components/card/featuredCard';
+
 export async function getServerSideProps() {
 	const res = await axios.get('http://localhost:5000/api/article/');
 	const { articles } = res.data;
