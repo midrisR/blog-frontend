@@ -8,7 +8,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
-	const res = await axios.get(`http://localhost:5000/api/article/slug/${slug}`);
+	const res = await axios.get(`https://dhanio-blog.herokuapp.com/api/article/slug/${slug}`);
 	const article = res.data;
 	return {
 		props: {
@@ -21,7 +21,7 @@ export default function DetailArticle({ article }) {
 	const { isAuthenticated, user } = useAuth0();
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
-	let url = 'http://localhost:5000/api/guest';
+	let url = 'https://dhanio-blog.herokuapp.com/api/guest';
 
 	useEffect(() => {
 		async function createGuest() {

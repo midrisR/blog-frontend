@@ -61,7 +61,7 @@ export default function Create({ token }) {
 		body.append('tag', field.tag);
 		body.append('active', field.active);
 		body.append('featured', field.featured);
-		axios('http://localhost:5000/api/article', {
+		axios('https://dhanio-blog.herokuapp.com/api/article', {
 			method: 'POST',
 			data: body,
 			headers: {

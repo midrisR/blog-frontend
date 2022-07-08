@@ -12,7 +12,7 @@ import InputFile from '../../../components/form/InputFile';
 export async function getServerSideProps(ctx) {
 	const { token } = await authPageAdmin(ctx);
 
-	const res = await axios.get('http://localhost:5000/api/user/me', {
+	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/user/me', {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
@@ -82,7 +82,7 @@ export default function User({ user, token }) {
 		formData.append('file', field.file);
 		formData.append('socialMedia', JSON.stringify(field.socialMedia));
 		try {
-			await axios('http://localhost:5000/api/user/me/update', {
+			await axios('https://dhanio-blog.herokuapp.com/api/user/me/update', {
 				method: 'PUT',
 				data: formData,
 				headers: {

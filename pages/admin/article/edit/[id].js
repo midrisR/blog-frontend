@@ -16,7 +16,7 @@ export async function getServerSideProps(ctx) {
 	await authPageAdmin(ctx);
 	const { token } = cookies(ctx);
 	const { id } = ctx.params;
-	const res = await axios.get(`http://localhost:5000/api/article/${id}`);
+	const res = await axios.get(`https://dhanio-blog.herokuapp.com/api/article/${id}`);
 	const article = await res.data;
 	return {
 		props: { article, token, id },
@@ -72,7 +72,7 @@ export default function Edit({ article, token, id }) {
 		body.append('slug', article.slug);
 		body.append('tag', field.tag);
 		try {
-			await axios(`http://localhost:5000/api/article/${id}`, {
+			await axios(`https://dhanio-blog.herokuapp.com/api/article/${id}`, {
 				method: 'PUT',
 				data: body,
 				headers: {

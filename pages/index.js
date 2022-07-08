@@ -5,7 +5,7 @@ import Layout from '../components/layouts';
 import FeaturedCard from '../components/card/featuredCard';
 
 export async function getServerSideProps() {
-	const res = await axios.get('http://localhost:5000/api/article/');
+	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
 	return {
 		props: { articles },
@@ -13,18 +13,17 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ articles }) {
+	const list = articles.filter((key) => !key.featured);
+	const featured = articles.filter((key) => !!key.featured);
 	return (
-		<div className="w-full flex flex-wrap justify-center px-8 my-4 md:my-20 gap-12 lg:gap-12">
-			{articles.map((article, i) => (
-				<React.Fragment key={i}>
-					{article.featured ? (
-						<FeaturedCard article={article} />
-					) : (
-						<ArticleCard article={article} />
-					)}
-				</React.Fragment>
-			))}
-		</div>
+		<>
+			<FeaturedCard articles={featured} />
+			<div className="w-full flex flex-wrap justify-center px-8 my-4 md:my-20 gap-12 lg:gap-12">
+				{list.map((article, i) => (
+					<ArticleCard key={i} article={article} />
+				))}
+			</div>
+		</>
 	);
 }
 Home.getLayout = function getLayout(page) {

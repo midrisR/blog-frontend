@@ -31,7 +31,7 @@ export default function Login() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const url = 'http://localhost:5000/api/user/login';
+		const url = 'https://dhanio-blog.herokuapp.com/api/user/login';
 		try {
 			const res = await axios(url, {
 				method: 'POST',

@@ -7,21 +7,21 @@ export default function useComments() {
 	const [comment, setComment] = useState('');
 	const getComment = async () => {
 		try {
-			const res = await fetch('http://localhost:5000/api/comment');
+			const res = await fetch('https://dhanio-blog.herokuapp.com/api/comment');
 			const data = await res.json();
 			return data;
 		} catch (err) {
 			console.log(err);
 		}
 	};
-	const { data, mutate } = useSWR('http://localhost:5000/api/comment', getComment);
+	const { data, mutate } = useSWR('https://dhanio-blog.herokuapp.com/api/comment', getComment);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const token = await getAccessTokenSilently();
 
 		try {
-			await fetch('http://localhost:5000/api/comment', {
+			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
 				method: 'POST',
 				body: JSON.stringify({
 					article: comment.article,
@@ -48,7 +48,7 @@ export default function useComments() {
 		const token = await getAccessTokenSilently();
 
 		try {
-			await fetch('http://localhost:5000/api/comment', {
+			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
 				method: 'DELETE',
 				body: JSON.stringify({ comment }),
 				headers: {

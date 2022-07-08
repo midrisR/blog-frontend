@@ -35,7 +35,10 @@ function Markdown({ defaultValue, handleEditorChange, name, mdError }) {
 		}
 
 		try {
-			const { data } = await axios.post('http://localhost:5000/api/image', formData);
+			const { data } = await axios.post(
+				'https://dhanio-blog.herokuapp.com/api/image',
+				formData
+			);
 			console.log(data);
 			callback(data);
 		} catch (error) {
