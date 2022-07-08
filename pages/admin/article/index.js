@@ -5,7 +5,7 @@ import { authPageAdmin } from '../../../middleware/auth';
 import { MdEditNote, MdOutlineDelete } from 'react-icons/md';
 export async function getServerSideProps(ctx) {
 	await authPageAdmin(ctx);
-	const res = await axios.get('http://localhost:5000/api/article/');
+	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
 	return {
 		props: { articles },
