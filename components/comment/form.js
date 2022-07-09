@@ -1,7 +1,11 @@
 import { useSession, signOut } from 'next-auth/react';
-
-export default function CommentForm({ comment, setComment, onSubmit, id, setIsOpen }) {
+import React, { useCallback } from 'react';
+export default React.memo(function CommentForm({ comment, setComment, onSubmit, id, setIsOpen }) {
 	const { data: session } = useSession();
+
+	const handleLogut = useCallback(() => {
+		signOut();
+	}, []);
 
 	return (
 		<form onSubmit={onSubmit}>
@@ -22,7 +26,7 @@ export default function CommentForm({ comment, setComment, onSubmit, id, setIsOp
 						<button className="py-2 px-4 rounded bg-slate-800 text-white disabled:opacity-40 hover:bg-blue-700">
 							Send
 						</button>
-						<button className="text-gray-500" onClick={() => signOut()}>
+						<button className="text-gray-500" onClick={handleLogut}>
 							Log out
 						</button>
 					</div>
@@ -37,4 +41,4 @@ export default function CommentForm({ comment, setComment, onSubmit, id, setIsOp
 			</div>
 		</form>
 	);
-}
+});
