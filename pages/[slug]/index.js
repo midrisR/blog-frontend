@@ -6,10 +6,12 @@ import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
-export async function getServerSideProps(ctx) {
-	const { slug } = ctx.query;
+
+export async function getStaticProps({ params }) {
 	const providers = await getProviders();
-	const res = await axios.get(`https://dhanio-blog.herokuapp.com/api/article/slug/${slug}`);
+	const res = await axios.get(
+		`https://dhanio-blog.herokuapp.com/api/article/slug/${params.slug}`
+	);
 	const article = res.data;
 	return {
 		props: {
@@ -18,10 +20,20 @@ export async function getServerSideProps(ctx) {
 		},
 	};
 }
+
+export async function getStaticPaths() {
+	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article');
+	const paths = res.data.articles.map((article) => ({
+		params: { slug: article.slug },
+	}));
+	return { paths, fallback: 'blocking' };
+}
+
 export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
+	if (!article) return <h1 className="text-white">Loading</h1>;
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
