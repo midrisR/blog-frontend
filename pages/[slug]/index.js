@@ -4,7 +4,7 @@ import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
 import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
-import { getProviders, useSession } from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
 
 export async function getServerSideProps(ctx) {
@@ -22,7 +22,6 @@ export async function getServerSideProps(ctx) {
 
 export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const { data: session } = useSession();
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
 

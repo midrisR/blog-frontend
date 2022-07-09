@@ -4,7 +4,6 @@ import { useSession } from 'next-auth/react';
 
 export default function useComments(id) {
 	const { data: session } = useSession();
-	console.log(id);
 	const [comment, setComment] = useState('');
 	const getComment = async () => {
 		try {
@@ -12,7 +11,7 @@ export default function useComments(id) {
 			const data = await res.json();
 			return data;
 		} catch (err) {
-			console.log(err);
+			throw new Error(err.response.message);
 		}
 	};
 	const { data, mutate } = useSWR(
@@ -43,7 +42,7 @@ export default function useComments(id) {
 			});
 			await mutate();
 		} catch (err) {
-			console.log(err);
+			throw new Error(err.response.message);
 		}
 	};
 
@@ -59,7 +58,7 @@ export default function useComments(id) {
 			});
 			await mutate();
 		} catch (err) {
-			console.log(err);
+			throw new Error(err.response.message);
 		}
 	};
 
