@@ -33,11 +33,11 @@ export default function User({ user, token }) {
 		about: user.about,
 		file: user.avatar,
 		socialMedia: {
-			facebook: user.socialMedia.facebook,
-			instagram: user.socialMedia.instagram,
-			twitter: user.socialMedia.twitter,
-			github: user.socialMedia.github,
-			youtube: user.socialMedia.youtube,
+			facebook: user.socialMedia?.facebook,
+			instagram: user.socialMedia?.instagram,
+			twitter: user.socialMedia?.twitter,
+			github: user.socialMedia?.github,
+			youtube: user.socialMedia?.youtube,
 		},
 	});
 
@@ -129,7 +129,7 @@ export default function User({ user, token }) {
 							<Input
 								type="text"
 								onChange={handleSosmed}
-								defaultValue={user.socialMedia[input]}
+								defaultValue={user.socialMedia?.[input]}
 								name={input}
 								placeholder={input}
 							/>
@@ -157,28 +157,28 @@ export default function User({ user, token }) {
 					</blockquote>
 
 					<div className="mt-4">
-						<Link href={`https://github.com/${user.socialMedia.github}`}>
+						<Link href={`https://github.com/${user.socialMedia?.github}`}>
 							<a className="flex items-center mb-4 text-slate-700">
 								<AiFillGithub size={24} />
-								<span className="ml-2">{user.socialMedia.github}</span>
+								<span className="ml-2">{user.socialMedia?.github}</span>
 							</a>
 						</Link>
-						<Link href={`https://facebook.com/${user.socialMedia.facebook}`}>
+						<Link href={`https://facebook.com/${user.socialMedia?.facebook}`}>
 							<a className="flex mb-4 text-blue-500">
 								<AiFillFacebook className="w-6 h-6" />
-								<span className="ml-2">{user.socialMedia.facebook}</span>
+								<span className="ml-2">{user.socialMedia?.facebook}</span>
 							</a>
 						</Link>
-						<Link href={`https://twitter.com/${user.socialMedia.twitter}`}>
+						<Link href={`https://twitter.com/${user.socialMedia?.twitter}`}>
 							<a className="flex mb-4 text-sky-400">
 								<AiOutlineTwitter className="w-6 h-6" />
-								<span className="ml-2">{user.socialMedia.twitter}</span>
+								<span className="ml-2">{user.socialMedia?.twitter}</span>
 							</a>
 						</Link>
-						<Link href={`https://youtube.com/${user.socialMedia.youtube}`}>
+						<Link href={`https://youtube.com/${user.socialMedia?.youtube}`}>
 							<a className="flex mb-4 text-red-500">
 								<AiFillYoutube className="w-6 h-6" />
-								<span className="ml-2">{user.socialMedia.youtube}</span>
+								<span className="ml-2">{user.socialMedia?.youtube}</span>
 							</a>
 						</Link>
 					</div>
