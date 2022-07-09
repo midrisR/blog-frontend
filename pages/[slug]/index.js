@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
@@ -6,7 +6,7 @@ import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
-
+import useSWR from 'swr';
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
 	const providers = await getProviders();
@@ -19,12 +19,19 @@ export async function getServerSideProps(ctx) {
 		},
 	};
 }
-
+const getComment = async (id) => {
+	const res = await axios(`https://dhanio-blog.herokuapp.com/api/comment/${id}`);
+	const data = res.data;
+	return data;
+};
 export default function DetailArticle({ article, providers }) {
+	const { data } = useSWR(
+		`https://dhanio-blog.herokuapp.com/api/comment/${article._id}`,
+		getComment(article._id)
+	);
 	const [isOpen, setIsOpen] = useState(false);
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
-
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
@@ -51,7 +58,12 @@ export default function DetailArticle({ article, providers }) {
 							<span className="text-slate-200 ml-1">{convertDate}</span>
 						</div>
 					</div>
-					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
+					<Comment
+						id={article._id}
+						isOpen={isOpen}
+						setIsOpen={setIsOpen}
+						comments={data}
+					/>
 				</div>
 			</div>
 			<ModalLogin isOpen={isOpen} setIsOpen={setIsOpen} providers={providers} />
