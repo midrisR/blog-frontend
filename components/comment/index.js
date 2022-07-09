@@ -13,7 +13,7 @@ export default function Comment({ id, setIsOpen }) {
 				setComment={setComment}
 				setIsOpen={setIsOpen}
 			/>
-			<CommentList comments={data} />
+			{/* <CommentList comments={data} /> */}
 		</div>
 	);
 }
