@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { signIn } from 'next-auth/react';
@@ -10,10 +9,6 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 	const handleModal = () => {
 		setIsOpen((prev) => !prev);
 	};
-
-	// useEffect(() => {
-	// 	if (typeof window !== 'undefined') console.log(window.location.pathname);
-	// }, []);
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
@@ -56,7 +51,7 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 														signIn(provider.id, {
 															callbackUrl:
 																typeof window !== 'undefined' &&
-																window.location.origin,
+																window.location.pathname,
 														})
 													}>
 													Sign in with {provider.name}
