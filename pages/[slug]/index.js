@@ -19,7 +19,7 @@ export async function getServerSideProps(ctx) {
 		},
 	};
 }
-export default React.memo(function DetailArticle({ article, providers }) {
+export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
@@ -55,8 +55,8 @@ export default React.memo(function DetailArticle({ article, providers }) {
 			<ModalLogin isOpen={isOpen} setIsOpen={setIsOpen} providers={providers} />
 		</>
 	);
-});
+}
 
-DetailArticle.getLayout = function getLayout(page) {
+React.memo(DetailArticle).getLayout = function getLayout(page) {
 	return <Layout> {page} </Layout>;
 };
