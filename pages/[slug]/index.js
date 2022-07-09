@@ -23,7 +23,6 @@ export async function getServerSideProps(ctx) {
 export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const { data: session } = useSession();
-	console.log(session);
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
 

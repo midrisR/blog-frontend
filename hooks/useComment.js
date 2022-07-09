@@ -2,20 +2,23 @@ import { useState } from 'react';
 import useSWR from 'swr';
 import { useSession } from 'next-auth/react';
 
-export default function useComments() {
+export default function useComments(id) {
 	const { data: session } = useSession();
-
+	console.log(id);
 	const [comment, setComment] = useState('');
 	const getComment = async () => {
 		try {
-			const res = await fetch('https://dhanio-blog.herokuapp.com/api/comment');
+			const res = await fetch(`https://dhanio-blog.herokuapp.com/api/comment/${id}`);
 			const data = await res.json();
 			return data;
 		} catch (err) {
 			console.log(err);
 		}
 	};
-	const { data, mutate } = useSWR('https://dhanio-blog.herokuapp.com/api/comment', getComment);
+	const { data, mutate } = useSWR(
+		`https://dhanio-blog.herokuapp.com/api/comment/${id}`,
+		getComment
+	);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
