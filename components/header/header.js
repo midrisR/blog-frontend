@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SearchModal from '../sidebar/SearchModal';
 
 export default function Header({ sidebarOpen, setSidebarOpen }) {

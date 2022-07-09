@@ -2,7 +2,7 @@ import axios from 'axios';
 import Layout from '../components/layouts';
 import ArticleCard from '../components/card/articleCard';
 import FeaturedCard from '../components/card/featuredCard';
-import { getProviders, useSession } from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 
 export async function getServerSideProps() {
 	const providers = await getProviders();
@@ -14,7 +14,6 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ articles, providers }) {
-	const { data: session } = useSession();
 	const list = articles.filter((key) => !key.featured);
 	const featured = articles.filter((key) => !!key.featured);
 	return (

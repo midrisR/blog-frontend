@@ -1,4 +1,3 @@
-import { GrArticle, GrUser } from 'react-icons/gr';
 import { MdArticle, MdPerson } from 'react-icons/md';
 export const List = [
 	{

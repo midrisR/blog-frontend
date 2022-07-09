@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Admin from '../../../components/layouts/admin';
 import { authPageAdmin } from '../../../middleware/auth';
 import axios from 'axios';
