@@ -6,7 +6,7 @@ import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
-
+import ButtonLogin from '../../components/comment/buttonLogin';
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
 	const providers = await getProviders();
@@ -49,7 +49,8 @@ export default function DetailArticle({ article, providers }) {
 							<span className="text-slate-200 ml-1">{convertDate}</span>
 						</div>
 					</div>
-					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
+					{/* <Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+					<ButtonLogin setIsOpen={setIsOpen} />
 				</div>
 			</div>
 			<ModalLogin isOpen={isOpen} setIsOpen={setIsOpen} providers={providers} />
