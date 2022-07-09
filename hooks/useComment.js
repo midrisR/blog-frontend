@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import useSWR from 'swr';
 import { useSession } from 'next-auth/react';
 
 export default function useComments(id) {
 	const { data: session } = useSession();
 	const [comment, setComment] = useState('');
+
 	const getComment = async () => {
 		try {
-			const res = await fetch(`https://dhanio-blog.herokuapp.com/api/comment/${id}`);
-			const data = await res.json();
-			return data;
+			const res = await axios(`https://dhanio-blog.herokuapp.com/api/comment/${id}`);
+			return res.data;
 		} catch (err) {
-			throw new Error(err.response.message);
+			console.log('error', error);
 		}
 	};
+
 	const { data, mutate } = useSWR(
 		`https://dhanio-blog.herokuapp.com/api/comment/${id}`,
 		getComment
@@ -22,7 +24,6 @@ export default function useComments(id) {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const { user } = session;
-
 		try {
 			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
 				method: 'POST',
@@ -42,25 +43,9 @@ export default function useComments(id) {
 			});
 			await mutate();
 		} catch (err) {
-			throw new Error(err.response.message);
+			console.log('error', error);
 		}
 	};
 
-	const onDelete = async (comment) => {
-		try {
-			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
-				method: 'DELETE',
-				body: JSON.stringify({ comment }),
-				headers: {
-					Authorization: token,
-					'Content-Type': 'application/json',
-				},
-			});
-			await mutate();
-		} catch (err) {
-			throw new Error(err.response.message);
-		}
-	};
-
-	return { comment, setComment, data, onSubmit, onDelete };
+	return { comment, setComment, data, onSubmit };
 }
