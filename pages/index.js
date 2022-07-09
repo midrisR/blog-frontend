@@ -1,9 +1,9 @@
-import React from 'react';
-import ArticleCard from '../components/card/articleCard';
 import axios from 'axios';
 import Layout from '../components/layouts';
+import ArticleCard from '../components/card/articleCard';
 import FeaturedCard from '../components/card/featuredCard';
 import { getProviders, useSession } from 'next-auth/react';
+
 export async function getServerSideProps() {
 	const providers = await getProviders();
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');

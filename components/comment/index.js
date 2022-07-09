@@ -2,8 +2,8 @@ import CommentForm from './form';
 import useComments from '../../hooks/useComment';
 import CommentList from './list';
 
-export default function Comment({ id, setIsOpen, comments }) {
-	const { setComment, comment, onSubmit } = useComments(id);
+export default function Comment({ id, setIsOpen }) {
+	const { setComment, comment, data, onSubmit } = useComments(id);
 	return (
 		<div className="mt-20">
 			<CommentForm
@@ -13,7 +13,7 @@ export default function Comment({ id, setIsOpen, comments }) {
 				setComment={setComment}
 				setIsOpen={setIsOpen}
 			/>
-			<CommentList comments={comments} />
+			<CommentList comments={data} />
 		</div>
 	);
 }
