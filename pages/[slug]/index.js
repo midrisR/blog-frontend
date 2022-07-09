@@ -57,6 +57,6 @@ export default function DetailArticle({ article, providers }) {
 	);
 }
 
-React.memo(DetailArticle).getLayout = function getLayout(page) {
+DetailArticle.getLayout = function getLayout(page) {
 	return <Layout> {page} </Layout>;
 };
