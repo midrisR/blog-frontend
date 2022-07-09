@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import useSWR from 'swr';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useSession } from 'next-auth/react';
 
 export default function useComments() {
-	const { getAccessTokenSilently, user } = useAuth0();
+	const { data: session } = useSession();
+
 	const [comment, setComment] = useState('');
 	const getComment = async () => {
 		try {
@@ -18,7 +19,7 @@ export default function useComments() {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		const token = await getAccessTokenSilently();
+		const { user } = session;
 
 		try {
 			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
@@ -29,7 +30,6 @@ export default function useComments() {
 					guest: user,
 				}),
 				headers: {
-					Authorization: token,
 					'Content-Type': 'application/json',
 				},
 			});
@@ -45,8 +45,6 @@ export default function useComments() {
 	};
 
 	const onDelete = async (comment) => {
-		const token = await getAccessTokenSilently();
-
 		try {
 			await fetch('https://dhanio-blog.herokuapp.com/api/comment', {
 				method: 'DELETE',

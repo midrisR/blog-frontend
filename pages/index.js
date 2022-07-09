@@ -3,16 +3,18 @@ import ArticleCard from '../components/card/articleCard';
 import axios from 'axios';
 import Layout from '../components/layouts';
 import FeaturedCard from '../components/card/featuredCard';
-
+import { getProviders, useSession } from 'next-auth/react';
 export async function getServerSideProps() {
+	const providers = await getProviders();
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
 	return {
-		props: { articles },
+		props: { articles, providers },
 	};
 }
 
-export default function Home({ articles }) {
+export default function Home({ articles, providers }) {
+	const { data: session } = useSession();
 	const list = articles.filter((key) => !key.featured);
 	const featured = articles.filter((key) => !!key.featured);
 	return (

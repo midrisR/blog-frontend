@@ -7,7 +7,7 @@ export default function CommentList({ comments, onDelete }) {
 					<div key={i} className="flex space-x-4">
 						<div className="flex-shrink-0">
 							<img
-								src={comment.guest.picture}
+								src={comment.guest.image}
 								alt={comment.guest.nickname}
 								width={40}
 								height={40}
