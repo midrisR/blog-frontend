@@ -51,7 +51,7 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 														signIn(provider.id, {
 															callbackUrl:
 																typeof window !== 'undefined' &&
-																window.location.pathname,
+																window.location.origin,
 														})
 													}>
 													Sign in with {provider.name}
