@@ -11,6 +11,7 @@ import Modal from '../../../components/modal/adminModal';
 import InputFile from '../../../components/form/InputFile';
 export async function getServerSideProps(ctx) {
 	const { token } = await authPageAdmin(ctx);
+
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/user/me', {
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -41,12 +42,10 @@ export default function User({ user, token }) {
 	});
 
 	const [isRefreshing, setIsRefreshing] = useState(false);
-
 	const refreshData = () => {
 		router.replace(router.asPath);
 		setIsRefreshing(true);
 	};
-
 	useEffect(() => {
 		setIsRefreshing(false);
 	}, [user]);
