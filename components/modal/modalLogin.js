@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { signIn } from 'next-auth/react';
@@ -9,6 +10,10 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 	const handleModal = () => {
 		setIsOpen((prev) => !prev);
 	};
+
+	// useEffect(() => {
+	// 	if (typeof window !== 'undefined') console.log(window.location.pathname);
+	// }, []);
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
@@ -49,7 +54,9 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 													className="w-48 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 													onClick={() =>
 														signIn(provider.id, {
-															callbackUrl: router.asPath,
+															callbackUrl:
+																typeof window !== 'undefined' &&
+																window.location.origin,
 														})
 													}>
 													Sign in with {provider.name}
