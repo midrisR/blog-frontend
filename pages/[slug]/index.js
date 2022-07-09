@@ -4,7 +4,6 @@ import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
 import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
-import Router from 'next/router';
 import { getProviders, useSession } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
 

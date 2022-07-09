@@ -1,8 +1,8 @@
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function CommentForm({ comment, setComment, onSubmit, id, setIsOpen }) {
 	const { data: session } = useSession();
-	console.log(session);
+
 	return (
 		<form onSubmit={onSubmit}>
 			<textarea
