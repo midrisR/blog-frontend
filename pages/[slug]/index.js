@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
@@ -21,6 +21,12 @@ export async function getServerSideProps(ctx) {
 }
 export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [date, setDate] = useState('');
+	useEffect(() => {
+		const date = new Date(article.created_at).toLocaleDateString('id-ID');
+		const convertDate = date.split(' ').slice(1).join(' ');
+		setDate(convertDate);
+	}, []);
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
@@ -44,6 +50,7 @@ export default function DetailArticle({ article, providers }) {
 								alt=""
 							/>
 							<span className="text-slate-200 ml-2">{article.user.name},</span>
+							{date && <span className="text-slate-200/30 ml-1">{date}</span>}
 						</div>
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
