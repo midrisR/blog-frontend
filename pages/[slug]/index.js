@@ -44,9 +44,6 @@ export default function DetailArticle({ article, providers }) {
 								alt=""
 							/>
 							<span className="text-slate-200 ml-2">{article.user.name},</span>
-							<span className="text-slate-200/30 ml-1">
-								{new Date(article.created_at).toLocaleDateString('id-ID')}
-							</span>
 						</div>
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
