@@ -51,8 +51,8 @@ export default function DetailArticle({ article, providers }) {
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
 				</div>
+				<ModalLogin isOpen={isOpen} setIsOpen={setIsOpen} providers={providers} />
 			</div>
-			<ModalLogin isOpen={isOpen} setIsOpen={setIsOpen} providers={providers} />
 		</>
 	);
 }
