@@ -47,7 +47,7 @@ export default function DetailArticle({ article, providers }) {
 								alt=""
 							/>
 							<span className="text-slate-200 ml-2">{article.user.name}</span>
-							<span className="text-slate-200 ml-1">{convertDate}</span>
+							{/* <span className="text-slate-200 ml-1">{convertDate}</span> */}
 						</div>
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
