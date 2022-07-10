@@ -35,7 +35,7 @@ export default function DetailArticle({ article, providers }) {
 
 					<img src={article.cover} className="mb-5" alt={article.title} />
 					<RenderMd markdown={article.content} />
-					{/* <div className="like py-3 flex justify-between items-center gap-1">
+					<div className="like py-3 flex justify-between items-center gap-1">
 						<div className="flex items-center gap-2">
 							<HiOutlineShare color="#e2e8f0" size={28} className="cursor-pointer" />
 							<span className="text-slate-200">Share</span>
@@ -49,7 +49,7 @@ export default function DetailArticle({ article, providers }) {
 							<span className="text-slate-200 ml-2">{article.user.name}</span>
 							<span className="text-slate-200 ml-1">{convertDate}</span>
 						</div>
-					</div> */}
+					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
 				</div>
 				<ButtonLogin setIsOpen={setIsOpen} />
