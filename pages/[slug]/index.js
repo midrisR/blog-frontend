@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import RenderMd from '../../components/markdown/Md';
+import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
 import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
-import dynamic from 'next/dynamic';
-
-const RenderMd = dynamic(() => import('../../components/markdown/Md'), {
-	ssr: false,
-});
 
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
@@ -39,7 +34,7 @@ export default function DetailArticle({ article, providers }) {
 					</div>
 
 					<img src={article.cover} className="mb-5" alt={article.title} />
-					<RenderMd markdown={article.content} />
+					{/* <RenderMd markdown={article.content} /> */}
 					<div className="like py-3 flex justify-between items-center gap-1">
 						<div className="flex items-center gap-2">
 							<HiOutlineShare color="#e2e8f0" size={28} className="cursor-pointer" />
