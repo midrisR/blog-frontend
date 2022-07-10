@@ -7,7 +7,7 @@ export async function getServerSideProps() {
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
 	return {
-		props: { articles, providers },
+		props: { articles },
 	};
 }
 
