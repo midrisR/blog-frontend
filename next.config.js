@@ -16,4 +16,5 @@ module.exports = {
 		styledComponents: true,
 	},
 	reactStrictMode: true,
+	swcMinify: true,
 };

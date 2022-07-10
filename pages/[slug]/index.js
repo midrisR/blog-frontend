@@ -7,7 +7,7 @@ import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
 	const { slug } = ctx.query;
 	const providers = await getProviders();
 	const res = await axios.get(`https://dhanio-blog.herokuapp.com/api/article/slug/${slug}`);
