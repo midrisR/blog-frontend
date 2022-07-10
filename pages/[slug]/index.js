@@ -23,6 +23,7 @@ export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const date = new Date(article.created_at).toDateString('id');
 	const convertDate = date.split(' ').slice(1).join(' ');
+
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
