@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import RenderMd from '../../components/markdown/Md';
+// import RenderMd from '../../components/markdown/Md';
 import Layout from '../../components/layouts';
 import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
+import dynamic from 'next/dynamic';
+
+const RenderMd = dynamic(() => import('../../components/markdown/Md'), {
+	ssr: false,
+});
 
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
