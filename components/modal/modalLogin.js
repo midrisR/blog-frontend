@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { signIn } from 'next-auth/react';
-
 export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 	const handleModal = () => {
 		setIsOpen((prev) => !prev);
@@ -31,11 +30,14 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 							leave="ease-in duration-200"
 							leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95">
-							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+							<Dialog.Panel className="w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+								<div className="flex justify-center mb-5">
+									<img src="/next-auth.png" alt="" width={150} />
+								</div>
 								<Dialog.Title
 									as="h3"
-									className="text-center text-lg font-medium text-gray-900">
-									Login With
+									className="text-center text-lg text-gray-500 font-bold">
+									Authentication for Next.js
 								</Dialog.Title>
 								<div className="mt-2">
 									<div className="px-4 flex flex-col justify-center rounded-lg py-2">
@@ -43,9 +45,15 @@ export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 											<div key={i} className="mt-4 mx-auto">
 												<button
 													type="button"
-													className="w-48 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+													className="w-64 text-gray-900 relative bg-gray-100 hover:bg-gray-200 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
 													onClick={() => signIn(provider.id)}>
-													Sign in with {provider.name}
+													<img
+														src={`/${provider.name}.svg`}
+														className="w-6 absolute left-0 ml-3"
+													/>
+													<span className="ml-10">
+														Sign in with {provider.name}
+													</span>
 												</button>
 											</div>
 										))}

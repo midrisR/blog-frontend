@@ -6,25 +6,30 @@ import { HiOutlineShare } from 'react-icons/hi';
 import Comment from '../../components/comment';
 import { getProviders } from 'next-auth/react';
 import ModalLogin from '../../components/modal/modalLogin';
+
 export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
-	const providers = await getProviders();
 	const res = await axios.get(`https://dhanio-blog.herokuapp.com/api/article/slug/${slug}`);
 	const article = res.data;
 	return {
 		props: {
 			article,
-			providers,
 		},
 	};
 }
-export default function DetailArticle({ article, providers }) {
+export default function DetailArticle({ article }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [date, setDate] = useState('');
+	const [providers, setProviders] = useState('');
 	useEffect(() => {
+		(async () => {
+			const res = await getProviders();
+			setProviders(res);
+		})();
 		const articleDate = new Date(article.created_at).toLocaleDateString();
 		setDate(articleDate);
 	}, []);
+
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">

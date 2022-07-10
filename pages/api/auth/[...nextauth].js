@@ -2,9 +2,14 @@ import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import FacebookProvider from 'next-auth/providers/facebook';
 import TwitterProvider from 'next-auth/providers/twitter';
+import GoogleProvider from 'next-auth/providers/google';
 
 export default NextAuth({
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		}),
 		GithubProvider({
 			clientId: process.env.GITHUB_ID,
 			clientSecret: process.env.GITHUB_SECRET,
@@ -30,6 +35,12 @@ export default NextAuth({
 		async session({ session, token, user }) {
 			session.accessToken = token.accessToken;
 			return session;
+		},
+		async signIn({ account, profile }) {
+			if (account.provider === 'google') {
+				return profile.email_verified && profile.email.endsWith('@example.com');
+			}
+			return true; // Do different verification for other providers that don't have `email_verified`
 		},
 	},
 });
