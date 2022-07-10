@@ -21,9 +21,6 @@ export async function getServerSideProps(ctx) {
 }
 export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const date = new Date(article.created_at).toDateString('id');
-	const convertDate = date.split(' ').slice(1).join(' ');
-
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
@@ -46,8 +43,10 @@ export default function DetailArticle({ article, providers }) {
 								src={article.user.avatar}
 								alt=""
 							/>
-							<span className="text-slate-200 ml-2">{article.user.name}</span>
-							{/* <span className="text-slate-200 ml-1">{convertDate}</span> */}
+							<span className="text-slate-200 ml-2">{article.user.name},</span>
+							<span className="text-slate-200/30 ml-1">
+								{new Date(article.created_at).toLocaleDateString('id-ID')}
+							</span>
 						</div>
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />
