@@ -33,7 +33,6 @@ export default function DetailArticle({ article, providers }) {
 					</div>
 
 					<img src={article.cover} className="mb-5" alt={article.title} />
-					{/* <RenderMd markdown={article.content} /> */}
 					<div className="like py-3 flex justify-between items-center gap-1">
 						<div className="flex items-center gap-2">
 							<HiOutlineShare color="#e2e8f0" size={28} className="cursor-pointer" />
