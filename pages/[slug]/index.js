@@ -23,9 +23,8 @@ export default function DetailArticle({ article, providers }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [date, setDate] = useState('');
 	useEffect(() => {
-		const date = new Date(article.created_at).toLocaleDateString('id-ID');
-		const convertDate = date.split(' ').slice(1).join(' ');
-		setDate(convertDate);
+		const articleDate = new Date(article.created_at).toLocaleDateString();
+		setDate(articleDate);
 	}, []);
 	return (
 		<>
