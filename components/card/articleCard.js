@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import Head from 'next/head';
-import Image from 'next/image';
 import removeMd from 'remove-markdown';
 import CouldinaryImage from '../cloudinary';
 export default function ArticleCard({ article }) {
