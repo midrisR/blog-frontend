@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import removeMd from 'remove-markdown';
 import CouldinaryImage from '../cloudinary';
 export default function ArticleCard({ article }) {
@@ -12,7 +13,7 @@ export default function ArticleCard({ article }) {
 			<Head>
 				<title>article</title>
 			</Head>
-			<div className="bg-slate-800 w-full flex items-center lg:block transform transition-all lg:w-1/5 relative overflow-hidden shadow rounded-xl">
+			<div className="bg-slate-800 w-full flex items-center lg:block transform transition-all md:w-1/2 lg:w-1/5 relative overflow-hidden shadow rounded-xl">
 				<Link href={`/${article.slug}`}>
 					<a className="w-full flex flex-col lg:block">
 						<CouldinaryImage
@@ -21,6 +22,7 @@ export default function ArticleCard({ article }) {
 							height={250}
 							title={article.title}
 						/>
+
 						<div className="w-full px-6 lg:py-3 py-1">
 							<h1 className="text-xl font-bold text-gray-200 uppercase">
 								{article.title}

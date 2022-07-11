@@ -3,7 +3,7 @@ import Layout from '../components/layouts';
 import ArticleCard from '../components/card/articleCard';
 import FeaturedCard from '../components/card/featuredCard';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
 	return {
@@ -25,6 +25,7 @@ export default function Home({ articles }) {
 		</>
 	);
 }
+
 Home.getLayout = function getLayout(page) {
 	return <Layout>{page}</Layout>;
 };
