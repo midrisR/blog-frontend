@@ -12,6 +12,7 @@ module.exports = withBundleAnalyzer({
 			'avatars.githubusercontent.com',
 			'platform-lookaside.fbsbx.com',
 			'pbs.twimg.com',
+			'lh3.googleusercontent.com',
 		],
 	},
 	compiler: {
