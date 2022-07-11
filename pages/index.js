@@ -2,7 +2,7 @@ import axios from 'axios';
 import Layout from '../components/layouts';
 import ArticleCard from '../components/card/articleCard';
 import FeaturedCard from '../components/card/featuredCard';
-
+import Head from 'next/head';
 export async function getStaticProps() {
 	const res = await axios.get('https://dhanio-blog.herokuapp.com/api/article/');
 	const { articles } = res.data;
@@ -16,6 +16,9 @@ export default function Home({ articles }) {
 	const featured = articles.filter((key) => !!key.featured);
 	return (
 		<>
+			<Head>
+				<title>article</title>
+			</Head>
 			<FeaturedCard articles={featured} />
 			<div className="w-full flex flex-wrap justify-center px-8 my-4 md:my-20 gap-12 lg:gap-12">
 				{list.map((article, i) => (

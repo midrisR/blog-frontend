@@ -32,7 +32,7 @@ export default function Navbar() {
 						</button>
 					</div>
 					<div className="md:w-2/12 w-6/12">
-						<Link href="/">
+						<Link href="/" prefetch={false}>
 							<a className="flex items-center justify-center md:justify-start text-gray-200 font-black">
 								BLOGGER
 							</a>
@@ -78,21 +78,21 @@ export default function Navbar() {
 						</button>
 						<ul className="flex flex-col mt-4 md:justify-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
 							<li>
-								<Link href="/posts">
+								<Link href="/posts" prefetch={false}>
 									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
 										UI Design
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href="/posts">
+								<Link href="/" prefetch={false}>
 									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
 										Front-End
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href="/posts">
+								<Link href="/" prefetch={false}>
 									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
 										Back-End
 									</a>

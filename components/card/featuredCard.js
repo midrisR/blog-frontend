@@ -4,7 +4,7 @@ export default function FeaturedCard({ articles }) {
 	return (
 		<div className="w-full mt-10 scroll-px-48">
 			{articles.map((article, i) => (
-				<Link key={i} href={`/${article.slug}`}>
+				<Link key={i} href={`/${article.slug}`} prefetch={false}>
 					<a className="flex justify-center">
 						<div className="relative">
 							<CouldinaryImage
