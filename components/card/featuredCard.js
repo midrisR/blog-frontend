@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import CouldinaryImage from '../cloudinary';
+
 export default function FeaturedCard({ articles }) {
 	return (
-		<div className="w-full mt-10 scroll-px-48">
+		<div className="w-full mt-3">
 			{articles.map((article, i) => (
 				<Link key={i} href={`/${article.slug}`} prefetch={false}>
 					<a className="flex justify-center">
@@ -12,9 +13,10 @@ export default function FeaturedCard({ articles }) {
 								width={1280}
 								height={600}
 								title={article.title}
-								className="rounded-xl"
+								className="rounded-xl w-full"
 							/>
-							<span className="absolute font-bold text-2xl lg:text-4xl text-white bottom-5 lg:bottom-10 ml-6">
+
+							<span className="absolute uppercase text-2xl lg:text-4xl text-black bottom-5 lg:bottom-10 ml-6">
 								{article.title}
 							</span>
 						</div>

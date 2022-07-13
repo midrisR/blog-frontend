@@ -5,7 +5,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 	const getLayout = Component.getLayout || ((page) => page);
 	return (
 		<SessionProvider session={session}>
-			<div className="bg-slate-900">{getLayout(<Component {...pageProps} />)}</div>
+			<div className="bg-white">{getLayout(<Component {...pageProps} />)}</div>
 		</SessionProvider>
 	);
 }

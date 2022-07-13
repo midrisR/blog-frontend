@@ -19,14 +19,14 @@ export default function CommentList({ comments }) {
 								</div>
 								<div className="flex-grow">
 									<div className="flex space-x-2">
-										<span className="text-sm text-white font-semibold">
+										<span className="text-sm text-black font-semibold">
 											{comment.guest.name}
 										</span>
-										<span className="text-white/25 text-sm ml-4">
+										<span className="text-black text-sm ml-4">
 											{new Date(comment.created_at).toDateString('id')}
 										</span>
 									</div>
-									<div className="text-sm text-white">{comment.comment}</div>
+									<div className="text-sm text-black">{comment.comment}</div>
 								</div>
 							</div>
 						);

@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { signIn } from 'next-auth/react';
+
 export default function ModalLogin({ isOpen, setIsOpen, providers }) {
 	const handleModal = () => {
 		setIsOpen((prev) => !prev);

@@ -33,27 +33,27 @@ export default function DetailArticle({ article }) {
 	return (
 		<>
 			<div className="w-full mx-auto md:max-w-5xl px-8 md:px-6">
-				<div className="py-20 prose prose-pre:bg-slate-900 prose-a:text-yellow-600 prose-headings:text-gray-200 prose-ul:text-gray-200 prose-li:text-gray-200 prose-p:text-gray-300 md:prose-lg lg:prose-img:my-0 prose-img:my-0 max-w-none">
+				<div className="py-20 prose prose-pre:bg-slate-900 prose-a:text-yellow-600 prose-headings:text-black prose-ul:text-black prose-li:text-black prose-p:text-black md:prose-lg lg:prose-img:my-0 prose-img:my-0 max-w-none">
 					<div className="mb-10">
-						<h1 className="text-gray-200 text-6xl font-black mb-2">{article.title} </h1>
-						<span className="text-sm text-slate-200 italic">Tag : {article.tag}</span>
+						<h1 className="text-black text-6xl font-semibold mb-2">{article.title} </h1>
+						<span className="text-sm text-black italic">Tag : {article.tag}</span>
 					</div>
 
 					<img src={article.cover} className="mb-5" alt={article.title} />
 					<RenderMd markdown={article.content} />
 					<div className="like py-3 flex justify-between items-center gap-1">
 						<div className="flex items-center gap-2">
-							<HiOutlineShare color="#e2e8f0" size={28} className="cursor-pointer" />
-							<span className="text-slate-200">Share</span>
+							<HiOutlineShare color="#000" size={28} className="cursor-pointer" />
+							<span className="text-black">Share</span>
 						</div>
 						<div className="flex items-center gap-1 share">
 							<img
 								className="rounded-full w-8 h-8"
 								src={article.user.avatar}
-								alt=""
+								alt={article.user.name}
 							/>
-							<span className="text-slate-200 ml-2">{article.user.name},</span>
-							{date && <span className="text-slate-200/30 ml-1">{date}</span>}
+							<span className="text-black ml-2">{article.user.name},</span>
+							{date && <span className="text-black ml-1">{date}</span>}
 						</div>
 					</div>
 					<Comment id={article._id} isOpen={isOpen} setIsOpen={setIsOpen} />

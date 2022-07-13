@@ -11,7 +11,7 @@ export default function Navbar() {
 		setSearch((search) => !search);
 	};
 	return (
-		<nav className="sticky top-0 z-40 w-full bg-slate-900 flex-none transition-colors duration-500 lg:z-50  ">
+		<nav className="sticky top-0 z-40 w-full bg-white flex-none transition-colors duration-500 lg:z-50  ">
 			<div className="w-full container mx-auto bg-salte-900">
 				<div className="flex items-center px-10 lg:px-42 md:px-20 py-4">
 					<div className="w-3/12 md:hidden">
@@ -21,7 +21,7 @@ export default function Navbar() {
 								className="h-6 w-6"
 								fill="none"
 								viewBox="0 0 24 24"
-								stroke="white"
+								stroke="black"
 								strokeWidth="2">
 								<path
 									strokeLinecap="round"
@@ -33,7 +33,7 @@ export default function Navbar() {
 					</div>
 					<div className="md:w-2/12 w-6/12">
 						<Link href="/" prefetch={false}>
-							<a className="flex items-center justify-center md:justify-start text-gray-200 font-black">
+							<a className="flex items-center justify-center md:justify-start text-black font-black">
 								BLOGGER
 							</a>
 						</Link>
@@ -45,7 +45,7 @@ export default function Navbar() {
 								className="h-6 w-6"
 								fill="none"
 								viewBox="0 0 24 24"
-								stroke="white"
+								stroke="black"
 								strokeWidth="2">
 								<path
 									strokeLinecap="round"
@@ -56,7 +56,7 @@ export default function Navbar() {
 						</button>
 					</div>
 					<div
-						className={`md:w-7/12 bg-slate-900 lg:bg-none w-full fixed md:static top-0 h-full md:h-auto p-10 md:p-0 transition-all ${
+						className={`md:w-7/12 bg-white lg:bg-none w-full fixed md:static top-0 h-full md:h-auto p-10 md:p-0 transition-all ${
 							offcavnas ? 'left-0' : '-left-full'
 						}`}>
 						<button
@@ -67,7 +67,7 @@ export default function Navbar() {
 								className="h-6 w-6"
 								fill="none"
 								viewBox="0 0 24 24"
-								stroke="white"
+								stroke="black"
 								strokeWidth="2">
 								<path
 									strokeLinecap="round"
@@ -79,21 +79,21 @@ export default function Navbar() {
 						<ul className="flex flex-col mt-4 md:justify-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
 							<li>
 								<Link href="/posts" prefetch={false}>
-									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
+									<a className="block py-4 pr-2 pl-3 text-black md:bg-transparent md:p-0">
 										UI Design
 									</a>
 								</Link>
 							</li>
 							<li>
 								<Link href="/" prefetch={false}>
-									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
+									<a className="block py-4 pr-2 pl-3 text-black md:bg-transparent md:p-0">
 										Front-End
 									</a>
 								</Link>
 							</li>
 							<li>
 								<Link href="/" prefetch={false}>
-									<a className="block py-4 pr-2 pl-3 text-gray-200 md:bg-transparent md:p-0">
+									<a className="block py-4 pr-2 pl-3 text-black md:bg-transparent md:p-0">
 										Back-End
 									</a>
 								</Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
 								</svg>
 							</button>
 							<input
-								className="bg-white py-2 px-6 w-full text-slate-700 font-semibold md:rounded-xl rounded-2xl focus:outline-none"
+								className="bg-white border py-2 px-6 w-full text-black md:rounded-xl rounded-2xl focus:outline-none"
 								placeholder="Search ..."
 							/>
 						</div>

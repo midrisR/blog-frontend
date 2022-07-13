@@ -19,11 +19,13 @@ export default function Home({ articles }) {
 			<Head>
 				<title>article</title>
 			</Head>
-			<FeaturedCard articles={featured} />
-			<div className="w-full flex flex-wrap justify-center px-8 my-4 md:my-20 gap-12 lg:gap-12">
-				{list.map((article, i) => (
-					<ArticleCard key={i} article={article} />
-				))}
+			<div className="container px-20 mx-auto">
+				<FeaturedCard articles={featured} />
+				<div className="w-full my-4 md:my-20">
+					{list.map((article, i) => (
+						<ArticleCard key={i} article={article} />
+					))}
+				</div>
 			</div>
 		</>
 	);
