@@ -19,17 +19,19 @@ export default function CommentForm({ comment, setComment, onSubmit, id, setIsOp
 			<div className="flex items-center mt-4">
 				{session ? (
 					<div className="flex items-center space-x-6">
-						<button className="py-2 px-4 rounded bg-slate-800 text-white disabled:opacity-40 hover:bg-blue-700">
+						<button className="py-2 px-4 rounded bg-blue-500 text-white disabled:opacity-40 hover:bg-blue-600 focus:outline-none">
 							Send
 						</button>
-						<button className="text-white bg-red-500 " onClick={() => signOut()}>
+						<button
+							className="text-red-600 focus:outline-none"
+							onClick={() => signOut()}>
 							Log out
 						</button>
 					</div>
 				) : (
 					<button
 						type="button"
-						className="py-2 px-4 rounded bg-blue-500 text-white disabled:opacity-40 "
+						className="py-2 px-4 rounded bg-blue-500 text-white disabled:opacity-40 focus:outline-none"
 						onClick={() => setIsOpen((prev) => !prev)}>
 						Log In
 					</button>
